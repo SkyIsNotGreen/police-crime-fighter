@@ -30,6 +30,7 @@ main {
     width: 90%;
     height: 90vh;
     object-fit: cover;
+
 }
 
 .info-container {
@@ -55,4 +56,22 @@ main {
     left: 6%;
     background-color: var(--white);
     padding: 10px;
+}
+
+.resource-container {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    bottom: 0px;
+    background-color: var(--white);
+    border-radius: 30px;
+
+}
+
+.resource {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    background-color: var(--light-coral);
+    border-radius: 100%;
 }
