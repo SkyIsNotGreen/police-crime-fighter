@@ -1,4 +1,5 @@
-/* CSS HEX */
+:root {
+    /* CSS HEX */
 --midnight-blue: #01004eff;
 --duke-blue: #0100a4ff;
 --blue: #0000feff;
@@ -8,3 +9,5 @@
 --red: #ff0101ff;
 --international-orange-engineering: #c00000ff;
 --maroon-web: #800000ff;
+
+}
