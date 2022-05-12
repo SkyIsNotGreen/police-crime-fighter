@@ -1,0 +1,39 @@
+/* CSS HEX */
+:root {
+  --midnight-blue: #01004eff;
+  --duke-blue: #0100a4ff;
+  --blue: #0000feff;
+  --medium-slate-blue: #7d7dffff;
+  --white: #fdfdffff;
+  --light-coral: #ff8182ff;
+  --red: #ff0101ff;
+  --international-orange-engineering: #c00000ff;
+  --maroon-web: #800000ff;
+}
+
+.leardrBoardColor {
+  background-color: var(--medium-slate-blue);
+}
+
+.winnerCardContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 5rem;
+}
+.goldCardItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.silverCardItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.silverCardItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
