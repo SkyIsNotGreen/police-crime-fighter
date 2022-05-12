@@ -19,8 +19,9 @@
   background-size: cover;
   background-blend-mode: hard-light;
 }
-
-img {
+.black-bg {
+  background-color: rgba(52, 52, 52, 0.4);
+  border-radius: 1rem;
 }
 
 .game-title,
@@ -32,4 +33,24 @@ img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.cards {
+  width: 20vw;
+  height: 20vh;
+  object-fit: contain;
+  margin: 1rem;
+}
+.circular {
+  border-radius: 2rem;
+}
+
+.fit-contain {
+  object-fit: contain;
 }
