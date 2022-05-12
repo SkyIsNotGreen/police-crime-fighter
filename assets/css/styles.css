@@ -1,10 +1,29 @@
-/* CSS HEX */
---midnight-blue: #01004eff;
---duke-blue: #0100a4ff;
---blue: #0000feff;
---medium-slate-blue: #7d7dffff;
---white: #fdfdffff;
---light-coral: #ff8182ff;
---red: #ff0101ff;
---international-orange-engineering: #c00000ff;
---maroon-web: #800000ff;
+:root {
+    --midnight-blue: #01004eff;
+    --duke-blue: #0100a4ff;
+    --blue: #0000feff;
+    --medium-slate-blue: #7d7dffff;
+    --white: #fdfdffff;
+    --light-coral: #ff8182ff;
+    --red: #ff0101ff;
+    --international-orange-engineering: #c00000ff;
+    --maroon-web: #800000ff;
+}
+
+.body {
+    background-color: var(--duke-blue);
+
+}
+
+.contacts-banner {
+    background-image: url(/assets/images/police-siren.jpg);
+    background-size: cover;
+    background-position: center;
+    background-color: var(--midnight-blue);
+    display: grid;
+    grid-column-start: auto;
+}
+
+.social-links-container {
+    
+}
