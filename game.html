@@ -25,7 +25,7 @@
       referrerpolicy="no-referrer"
     />
     <title>Game | Police Crime Finder</title>
-    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <link rel="stylesheet" href="./assets/css/game_styles.css" />
   </head>
   <body>
     <!-- Responsive navbar using bulma/jQuery -->
@@ -58,6 +58,40 @@
         </div>
       </div>
     </nav>
+
+    <main>
+
+
+
+
+      <!-- display map -->
+
+      <div class="map-container">
+        <img src="./assets/images/map-template.png" alt="map template" class="map-image">
+      <!-- display timer, score, money -->
+        <div class="info-container">
+          <div class="info-item"><p>Money: £500</p></div>
+          <div class="info-item"><p>Time: 50</p></div>
+          <div class="info-item"><p>Score: 260</p></div>
+        </div>
+      <!-- display crime level -->
+        <div class="crime-level-container">
+          <label >Crime Level:</label>
+          <progress id="file" value="70" max="100"> 32% </progress>
+        </div>
+
+      <!-- display resources -->
+        <div class="resource-container">
+          <img src="./assets/images/police-man-placeholder.png" alt="police officer resource" class="resource">
+          <img src="./assets/images/police-dog-placeholder.png" alt="police dog resource" class="resource">
+          <img src="./assets/images/police-car-placeholder.png" alt="policeman resource" class="resource">
+          <img src="./assets/images/police-heli-placeholder.png" alt="policeman resource" class="resource">
+        </div>
+      </div>
+
+
+
+    </main>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
