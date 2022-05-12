@@ -1,0 +1,35 @@
+:root {
+  --midnight-blue: #01004eff;
+  --duke-blue: #0100a4ff;
+  --blue: #0000feff;
+  --medium-slate-blue: #7d7dffff;
+  --white: #fdfdffff;
+  --light-coral: #ff8182ff;
+  --red: #ff0101ff;
+  --international-orange-engineering: #c00000ff;
+  --maroon-web: #800000ff;
+}
+
+.banner {
+  background-color: var(--duke-blue);
+  background-image: url("../images/crime-banner-photo.jpeg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-blend-mode: hard-light;
+}
+
+img {
+}
+
+.game-title,
+.info-title {
+  text-align: center;
+}
+.button-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
