@@ -21,3 +21,21 @@ const handleNavBarToggle = () => {
 $(document).ready(() => {
   handleNavBarToggle();
 });
+
+// get map from Google API
+
+// get data from police API
+
+// sort police data into objects in an array with co-ordinates and crime category
+
+// load resources and reset time, money & score
+
+// display x amount of crimes on map to begin
+
+// start timer
+
+// display more crimes on map the longer the time goes on
+
+// when resource is placed, work out radius and solvable crimes generating in that radius
+
+// when crime is solved, increase money and score and remove crime from map
