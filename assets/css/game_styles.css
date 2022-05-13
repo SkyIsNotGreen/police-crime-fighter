@@ -29,13 +29,14 @@ main {
     height: 100 vh;
 }
 
-.map-image {
-    margin: 15px;
-    width: 90%;
-    height: 90vh;
-    object-fit: cover;
 
-}
+#map {
+    margin: 15px;
+    height: 80vh;
+    /* The height is 400 pixels */
+    width: 90%;
+    /* The width is the width of the web page */
+  }
 
 /* info */
 
