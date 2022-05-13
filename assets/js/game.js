@@ -1,6 +1,7 @@
 console.log("hello from game");
 
 const mapApiKey = "AIzaSyAOCM-c2ZcfA_BS9BZSCd8a-fbiL9hz7a8";
+let crimeData = [];
 
 const handleNavBarToggle = () => {
   const navBurgerBtn = $(".navbar-burger");
@@ -20,13 +21,9 @@ const handleNavBarToggle = () => {
   navBurgerBtn.click(toggleNavBar);
 };
 
-$(document).ready(() => {
+$(document).ready(async () => {
   handleNavBarToggle();
 });
-
-const displayMap = () => {
-  console.log("Here");
-};
 
 // get and display map from Google API
 
@@ -41,15 +38,13 @@ const initMap = () => {
     zoomControl: false,
     gestureHandling: "none",
   });
-
-  map.setTilt(45);
 };
 
 window.initMap = initMap;
 
 // get data from police API
 
-const getPoliceData = async () => {
+const callPoliceApi = async () => {
   try {
     const response = await fetch(
       "https://data.police.uk/api/crimes-street/all-crime?poly=52.268,0.543:52.794,0.238:52.130,0.478&date=2020-01"
@@ -57,13 +52,25 @@ const getPoliceData = async () => {
 
     if (response.ok) {
       const policeData = response.json();
-      console.log(policeData);
+      return policeData;
     } else {
       throw new Error("Failed");
     }
   } catch (error) {
     console.log(error);
     return;
+  }
+};
+
+const getPoliceData = async () => {
+  const data = await callPoliceApi();
+  for (let i = 0; i < data.length; i++) {
+    const dataObject = {
+      category: data[i].category,
+      lat: data[i].location.latitude,
+      long: data[i].location.longitude,
+    };
+    crimeData.push(dataObject);
   }
 };
 
@@ -82,4 +89,6 @@ const getPoliceData = async () => {
 // when crime is solved, increase money and score and remove crime from map
 
 // create map
-getPoliceData();
+
+const sortedPoliceData = getPoliceData();
+console.log(crimeData);
