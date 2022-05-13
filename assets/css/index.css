@@ -16,8 +16,9 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
+  border: 1px solid var(--duke-blue);
   background-size: cover;
-  background-blend-mode: hard-light;
+  /* background-blend-mode: hard-light; */
 }
 .black-bg {
   background-color: rgba(52, 52, 52, 0.4);
@@ -48,9 +49,10 @@ h1 {
 .cards {
   width: 20vw;
   margin: 0.5rem;
+  box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.5);
 }
 .circular {
-  border-radius: 2rem;
+  border-radius: 20rem;
 }
 
 .fit-contain {
@@ -64,14 +66,30 @@ h1 {
   justify-content: center;
   align-items: center;
 }
+.vid {
+  box-shadow: 0 0 0.5rem rgba(212, 208, 208, 0.5);
+  margin-top: 4rem;
+}
+.promo-video,
+.promo-text {
+  border-left: solid 1px var(--duke-blue);
+}
 
 .promo-text {
   margin: 20px;
 }
 
-@media screen and (max-width = 596px) {
+.hr {
+  color: solid 2px var(--duke-blue);
+}
+
+@media screen and (max-device-width: 596px) and (orientation: portrait) {
   .features {
     display: flex;
     flex-direction: column;
+  }
+  .cards {
+    width: 95vw;
+    margin: 0.5rem;
   }
 }
