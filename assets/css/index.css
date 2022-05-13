@@ -17,6 +17,7 @@ body {
   padding: 0px;
   overflow-x: hidden;
 }
+/* banner */
 .banner {
   background-color: var(--duke-blue);
   background-image: url("../images/crime-banner-photo.jpeg");
@@ -47,6 +48,7 @@ h1 {
   font-weight: bold;
   font-size: 2rem;
 }
+/* features with 4 cards */
 .features {
   display: flex;
   justify-content: space-evenly;
@@ -58,8 +60,17 @@ h1 {
   width: 20vw;
   margin: 0.5rem;
   box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.5);
+  border-radius: 1.7rem;
 }
-
+.cards:hover {
+  width: 20vw;
+  margin: 0.5rem;
+  box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.5);
+  border-radius: 1.7rem;
+  background-color: none;
+  opacity: 0.2px;
+}
+/* promotional videos  */
 .promo-video {
   margin: 10px;
   display: flex;
@@ -82,6 +93,17 @@ h1 {
 .promo-text {
   margin: 20px;
 }
+.click-to-play {
+  font-weight: bolder;
+}
+
+ul {
+  padding-left: 1rem;
+}
+li {
+  list-style-type: disc;
+}
+/* map section */
 .map-div {
   margin: 2rem;
 }
@@ -95,6 +117,7 @@ h1 {
 .hr {
   color: solid 2px var(--duke-blue);
 }
+/* footer that contains a link to github */
 .footer {
   text-align: center;
   background-color: var(--duke-blue);
