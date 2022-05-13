@@ -42,12 +42,30 @@ const initMap = () => {
     gestureHandling: "none",
   });
 
-  map.setTile(45);
+  map.setTilt(45);
 };
 
 window.initMap = initMap;
 
 // get data from police API
+
+const getPoliceData = async () => {
+  try {
+    const response = await fetch(
+      "https://data.police.uk/api/crimes-street/all-crime?poly=52.268,0.543:52.794,0.238:52.130,0.478&date=2020-01"
+    );
+
+    if (response.ok) {
+      const policeData = response.json();
+      console.log(policeData);
+    } else {
+      throw new Error("Failed");
+    }
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+};
 
 // sort police data into objects in an array with co-ordinates and crime category
 
@@ -62,3 +80,6 @@ window.initMap = initMap;
 // when resource is placed, work out radius and solvable crimes generating in that radius
 
 // when crime is solved, increase money and score and remove crime from map
+
+// create map
+getPoliceData();
