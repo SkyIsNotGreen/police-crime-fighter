@@ -38,9 +38,27 @@ const initMap = () => {
     zoomControl: false,
     gestureHandling: "none",
   });
+  map.setOptions({ styles: styles["hide"] });
 };
 
 window.initMap = initMap;
+
+// google API styles to remove default markers
+
+const styles = {
+  default: [],
+  hide: [
+    {
+      featureType: "poi.business",
+      stylers: [{ visibility: "off" }],
+    },
+    {
+      featureType: "transit",
+      elementType: "labels.icon",
+      stylers: [{ visibility: "off" }],
+    },
+  ],
+};
 
 // get data from police API
 
