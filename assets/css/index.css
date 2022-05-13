@@ -34,19 +34,20 @@
   justify-content: center;
   align-items: center;
 }
-
+h1 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 2rem;
+}
 .features {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-bottom: 10rem;
 }
 .cards {
   width: 20vw;
-  height: 20vh;
-  object-fit: contain;
-  margin: 1rem;
+  margin: 0.5rem;
 }
 .circular {
   border-radius: 2rem;
@@ -66,4 +67,11 @@
 
 .promo-text {
   margin: 20px;
+}
+
+@media screen and (max-width = 596px) {
+  .features {
+    display: flex;
+    flex-direction: column;
+  }
 }
