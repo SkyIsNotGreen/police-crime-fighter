@@ -1,5 +1,8 @@
 console.log("hello from game");
 
+const mapApiKey = "AIzaSyAOCM-c2ZcfA_BS9BZSCd8a-fbiL9hz7a8";
+let crimeData = [];
+
 const handleNavBarToggle = () => {
   const navBurgerBtn = $(".navbar-burger");
 
@@ -18,19 +21,100 @@ const handleNavBarToggle = () => {
   navBurgerBtn.click(toggleNavBar);
 };
 
-$(document).ready(() => {
+$(document).ready(async () => {
   handleNavBarToggle();
 });
 
-// get map from Google API
+// get and display map from Google API
+
+const initMap = async () => {
+  // https://developers.google.com/maps/documentation/javascript/interaction
+  const birminghamLocation = { lat: 52.474282, lng: -1.898623 };
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 15,
+    center: birminghamLocation,
+    mapTypeId: "terrain",
+    disableDefaultUI: false,
+    // zoomControl: true,
+    // gestureHandling: "none",
+  });
+  map.setOptions({ styles: styles["hide"] });
+
+  const sortedPoliceData = await getPoliceData(map);
+
+  // getInitialMarkers(map);
+};
+
+window.initMap = initMap;
+
+// google API styles to remove default markers
+
+const styles = {
+  default: [],
+  hide: [
+    {
+      featureType: "poi.business",
+      stylers: [{ visibility: "off" }],
+    },
+    {
+      featureType: "transit",
+      elementType: "labels.icon",
+      stylers: [{ visibility: "off" }],
+    },
+  ],
+};
 
 // get data from police API
+
+const callPoliceApi = async () => {
+  try {
+    const response = await fetch(
+      "https://data.police.uk/api/crimes-street/all-crime?lat=52.474282&lng=-1.898623&date=2020-01"
+    );
+
+    if (response.ok) {
+      const policeData = response.json();
+      return policeData;
+    } else {
+      throw new Error("Failed");
+    }
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+};
+
+const getPoliceData = async (map) => {
+  const data = await callPoliceApi();
+  for (let i = 0; i < data.length; i++) {
+    const dataObject = {
+      position: new google.maps.LatLng(
+        data[i].location.latitude,
+        data[i].location.longitude
+      ),
+      type: data[i].category,
+    };
+    crimeData.push(dataObject);
+  }
+
+  getInitialMarkers(map);
+};
+
+// display x amount of crimes on map to begin
+
+const getInitialMarkers = (map) => {
+  console.log(crimeData);
+  for (let i = 0; i < crimeData.length; i++) {
+    const marker = new google.maps.Marker({
+      position: crimeData[i].position,
+      map: map,
+    });
+  }
+};
 
 // sort police data into objects in an array with co-ordinates and crime category
 
 // load resources and reset time, money & score
-
-// display x amount of crimes on map to begin
 
 // start timer
 
@@ -39,3 +123,5 @@ $(document).ready(() => {
 // when resource is placed, work out radius and solvable crimes generating in that radius
 
 // when crime is solved, increase money and score and remove crime from map
+
+// create map
