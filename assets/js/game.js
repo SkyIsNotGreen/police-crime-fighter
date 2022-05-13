@@ -1,5 +1,7 @@
 console.log("hello from game");
 
+const mapApiKey = "AIzaSyAOCM-c2ZcfA_BS9BZSCd8a-fbiL9hz7a8";
+
 const handleNavBarToggle = () => {
   const navBurgerBtn = $(".navbar-burger");
 
@@ -22,7 +24,28 @@ $(document).ready(() => {
   handleNavBarToggle();
 });
 
-// get map from Google API
+const displayMap = () => {
+  console.log("Here");
+};
+
+// get and display map from Google API
+
+const initMap = () => {
+  // https://developers.google.com/maps/documentation/javascript/interaction
+  const birminghamLocation = { lat: 52.474282, lng: -1.898623 };
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 15,
+    center: birminghamLocation,
+    mapTypeId: "terrain",
+    disableDefaultUI: true,
+    zoomControl: false,
+    gestureHandling: "none",
+  });
+
+  map.setTile(45);
+};
+
+window.initMap = initMap;
 
 // get data from police API
 
