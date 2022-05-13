@@ -10,9 +10,14 @@
     --maroon-web: #800000ff;
 }
 
-.body {
-    background-color: var(--duke-blue);
-
+.contacts-container {
+    display: grid;
+    grid-template-columns: repeat(2 , 1fr);
+    grid-template-rows: 1;
+    grid-template-areas:
+    "a b";
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .contacts-banner {
@@ -20,10 +25,27 @@
     background-size: cover;
     background-position: center;
     background-color: var(--midnight-blue);
-    display: grid;
-    grid-column-start: auto;
+    padding: 180px;
 }
 
-.social-links-container {
-    
+.contacts-social-links {
+    grid-area: "a";
+    display: inline;
+}
+
+.text-splash {
+    padding-top: 100px;
+    display: flex;
+    grid-area: "b";
+    text-align: center;
+}
+
+.contacts-social {
+    text-align: center;
+    margin: 10px;
+}
+
+.contactsPage-logo {
+    margin: auto;
+    max-width: 60%;
 }
