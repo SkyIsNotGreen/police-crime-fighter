@@ -28,6 +28,8 @@ const displayMap = () => {
   console.log("Here");
 };
 
+// get and display map from Google API
+
 const initMap = () => {
   // https://developers.google.com/maps/documentation/javascript/interaction
   const birminghamLocation = { lat: 52.474282, lng: -1.898623 };
@@ -44,8 +46,6 @@ const initMap = () => {
 };
 
 window.initMap = initMap;
-
-// get map from Google API
 
 // get data from police API
 
