@@ -1,0 +1,87 @@
+:root {
+    /* CSS HEX */
+--midnight-blue: #01004eff;
+--duke-blue: #0100a4ff;
+--blue: #0000feff;
+--medium-slate-blue: #7d7dffff;
+--white: #fdfdffff;
+--light-coral: #ff8182ff;
+--red: #ff0101ff;
+--international-orange-engineering: #c00000ff;
+--maroon-web: #800000ff;
+
+}
+
+/* main section */
+
+main {
+    height: 100vh;
+    background-image: linear-gradient(to right, var(--blue), var(--red));
+    /* filter: blur(50px); */
+}
+
+/* map */
+
+.map-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 100 vh;
+}
+
+
+#map {
+    margin: 15px;
+    height: 80vh;
+    /* The height is 400 pixels */
+    width: 90%;
+    /* The width is the width of the web page */
+  }
+
+/* info */
+
+.info-container {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    top: 15px;
+    opacity: 0.2px;
+    background-color: rgb(0, 0, 0, 0.6);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.info-item {
+    margin: auto;
+    color: var(--white);
+}
+
+
+.crime-level-container {
+    position: absolute;
+    bottom: 20px;
+    left: 6%;
+    background-color: var(--white);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.resource-container {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    bottom: 20px;
+    background-color: var(--midnight-blue);
+    border-radius: 30px;
+
+}
+
+.resource {
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+    background-color: var(--light-coral);
+    border-radius: 100%;
+}
