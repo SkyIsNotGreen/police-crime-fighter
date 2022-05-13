@@ -27,18 +27,22 @@ $(document).ready(async () => {
 
 // get and display map from Google API
 
-const initMap = () => {
+const initMap = async () => {
   // https://developers.google.com/maps/documentation/javascript/interaction
   const birminghamLocation = { lat: 52.474282, lng: -1.898623 };
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 15,
     center: birminghamLocation,
     mapTypeId: "terrain",
-    disableDefaultUI: true,
-    zoomControl: false,
-    gestureHandling: "none",
+    disableDefaultUI: false,
+    // zoomControl: true,
+    // gestureHandling: "none",
   });
   map.setOptions({ styles: styles["hide"] });
+
+  const sortedPoliceData = await getPoliceData(map);
+
+  // getInitialMarkers(map);
 };
 
 window.initMap = initMap;
@@ -80,23 +84,37 @@ const callPoliceApi = async () => {
   }
 };
 
-const getPoliceData = async () => {
+const getPoliceData = async (map) => {
   const data = await callPoliceApi();
   for (let i = 0; i < data.length; i++) {
     const dataObject = {
-      category: data[i].category,
-      lat: data[i].location.latitude,
-      long: data[i].location.longitude,
+      position: new google.maps.LatLng(
+        data[i].location.latitude,
+        data[i].location.longitude
+      ),
+      type: data[i].category,
     };
     crimeData.push(dataObject);
+  }
+
+  getInitialMarkers(map);
+};
+
+// display x amount of crimes on map to begin
+
+const getInitialMarkers = (map) => {
+  console.log(crimeData);
+  for (let i = 0; i < crimeData.length; i++) {
+    const marker = new google.maps.Marker({
+      position: crimeData[i].position,
+      map: map,
+    });
   }
 };
 
 // sort police data into objects in an array with co-ordinates and crime category
 
 // load resources and reset time, money & score
-
-// display x amount of crimes on map to begin
 
 // start timer
 
@@ -107,6 +125,3 @@ const getPoliceData = async () => {
 // when crime is solved, increase money and score and remove crime from map
 
 // create map
-
-const sortedPoliceData = getPoliceData();
-console.log(crimeData);
