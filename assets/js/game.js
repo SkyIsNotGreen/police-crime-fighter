@@ -1,7 +1,12 @@
 console.log("hello from game");
 
+// game variables
+
 const mapApiKey = "AIzaSyAOCM-c2ZcfA_BS9BZSCd8a-fbiL9hz7a8";
-let crimeData = [];
+const crimeData = [];
+const score = 0;
+const money = 0;
+const time = 0;
 
 const handleNavBarToggle = () => {
   const navBurgerBtn = $(".navbar-burger");
@@ -23,6 +28,7 @@ const handleNavBarToggle = () => {
 
 $(document).ready(async () => {
   handleNavBarToggle();
+  resetInfo();
 });
 
 // get and display map from Google API
@@ -84,6 +90,8 @@ const callPoliceApi = async () => {
   }
 };
 
+// sort police data into objects in an array with co-ordinates and crime category
+
 const getPoliceData = async (map) => {
   const data = await callPoliceApi();
   for (let i = 0; i < data.length; i++) {
@@ -112,9 +120,13 @@ const getInitialMarkers = (map) => {
   }
 };
 
-// sort police data into objects in an array with co-ordinates and crime category
-
 // load resources and reset time, money & score
+
+const resetInfo = () => {
+  $("#money").text("0");
+  $("#time").text("0");
+  $("#score").text("0");
+};
 
 // start timer
 
