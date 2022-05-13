@@ -69,7 +69,7 @@ const styles = {
 const callPoliceApi = async () => {
   try {
     const response = await fetch(
-      "https://data.police.uk/api/crimes-street/all-crime?poly=52.268,0.543:52.794,0.238:52.130,0.478&date=2020-01"
+      "https://data.police.uk/api/crimes-street/all-crime?lat=52.474282&lng=-1.898623&date=2020-01"
     );
 
     if (response.ok) {
