@@ -130,36 +130,49 @@ const getMarkers = (map) => {
 
   generateInfoWindow(marker);
 
-  const modal = $("#myModal");
+  const modal = $("#crimeModal");
 
   marker.addListener("click", () => {
-    displayModal(modal, marker);
-    const clickedMarkerInfo = crimeData.find(({ id }) => id === marker.id);
-    console.log(clickedMarkerInfo);
+    const clickedIndex = crimeData.findIndex(({ id }) => id === marker.id);
+    displayModal(modal, marker, clickedIndex);
+  });
+
+  $("#close-modal-btn").click(() => {
+    modal.hide();
   });
 
   crimeIndex++;
 };
 
 const closeModal = () => {
-  const modal = $("#myModal");
-
-  $("#close-modal-btn").click(() => {
-    modal.hide();
-  });
+  const modal = $("#crimeModal");
+  // marker.removeListener("click");
+  $("#choice-footer").empty();
+  modal.hide();
 };
 
-const displayModal = (modal) => {
-  $("#modal-crime").text(crimeData[crimeIndex].type);
+const appendModal = () => {
+  $("#choice-footer")
+    .append(`            <button id="choice-officer" class="button is-success">Officer</button>
+  <button id="choice-dog" class="button is-success">Dog</button>
+  <button id="choice-car" class="button is-success">Car</button>
+  <button id="choice-helicopter" class="button is-success">Helicopter</button>
+  <button id="choice-cancel" class="button">Cancel</button>`);
+};
+
+const displayModal = (modal, marker, clickedIndex) => {
+  $("#modal-crime").text(crimeData[clickedIndex].type);
   $("#modal-reward").text("£200");
+  appendModal();
   modal.show();
-  resourceListener(modal);
+  resourceListener(modal, marker);
 };
 
-const resourceListener = (modal) => {
+const resourceListener = (modal, marker) => {
   $("#choice-officer").click(() => {
-    console.log("Police");
-    modal.hide();
+    resourceSelected("Police Officer", 5000, 100, marker);
+    // setTimeout(crimeSolved, 2000, 100, marker);
+    closeModal();
   });
   $("#choice-dog").click(() => {
     console.log("Dog");
@@ -176,6 +189,22 @@ const resourceListener = (modal) => {
   $("#choice-cancel").click(() => {
     modal.hide();
   });
+};
+
+const resourceSelected = (type, timeRemaining, reward, marker) => {
+  setTimeout(crimeSolved, timeRemaining, reward, marker);
+};
+
+const crimeSolved = (reward, marker) => {
+  marker.setMap(null);
+  money += reward;
+  console.log(money + " " + reward);
+  updateInfo();
+};
+
+const updateInfo = () => {
+  $("#money").text(money);
+  $("#score").text(score);
 };
 
 // load resources and reset time, money & score
@@ -196,7 +225,6 @@ const onReady = () => {
 
 window.initMap = initMap;
 $(document).ready(onReady);
-closeModal();
 
 // display more crimes on map the longer the time goes on
 
