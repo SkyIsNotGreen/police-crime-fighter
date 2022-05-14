@@ -45,9 +45,33 @@ const initMap = async () => {
   // getInitialMarkers(map);
 };
 
-window.initMap = initMap;
+// Get & sort police data into objects in an array extracting relevant information
 
-// get data from police API
+const renderPoliceData = async (map) => {
+  // get the police data
+  const data = await callPoliceApi();
+
+  // create markers
+  crimeData = data.map((each) => {
+    const latitude = each.location.latitude;
+    const longitude = each.location.longitude;
+    const category = each.category;
+    const id = each.id;
+
+    const position = new google.maps.LatLng(latitude, longitude);
+
+    return {
+      position: position,
+      type: category,
+      latitude: latitude,
+      longitude: longitude,
+      id: id,
+    };
+  });
+
+  // show crime markers at certain intervals
+  setInterval(getMarkers, crimeInterval, map);
+};
 
 const callPoliceApi = async () => {
   try {
@@ -67,30 +91,10 @@ const callPoliceApi = async () => {
   }
 };
 
-// sort police data into objects in an array with co-ordinates and crime category
-
-const renderPoliceData = async (map) => {
-  // get the police data
-  const data = await callPoliceApi();
-
-  // create markers
-  crimeData = data.map((each) => {
-    const latitude = each.location.latitude;
-    const longitude = each.location.longitude;
-    const category = each.category;
-
-    const position = new google.maps.LatLng(latitude, longitude);
-
-    return {
-      position: position,
-      type: category,
-      latitude: latitude,
-      longitude: longitude,
-    };
-  });
-
-  // show crime markers at certain intervals
-  setInterval(getMarkers, crimeInterval, map);
+const resetInfo = () => {
+  $("#money").text(0);
+  $("#time").text(0);
+  $("#score").text(0);
 };
 
 // display x amount of crimes on map to begin
@@ -99,16 +103,11 @@ const getMarkers = (map) => {
   const marker = new google.maps.Marker({
     position: crimeData[crimeIndex].position,
     map: map,
+    id: crimeData[crimeIndex].id,
   });
 
   generateInfoWindow(marker);
-
-  marker.addListener("click", () => {
-    displayModal();
-    // alert(
-    //   `Lat: ${crimeData[crimeIndex].latitude} | Lon: ${crimeData[crimeIndex].longitude} | Type: ${crimeData[crimeIndex].type}`
-    // );
-  });
+  modalOnMarker(marker);
 
   crimeIndex++;
 };
@@ -135,20 +134,27 @@ const generateInfoWindow = (marker) => {
   });
 };
 
-const displayModal = () => {
+const modalOnMarker = (marker) => {
   const modal = $("#myModal");
+  marker.addListener("click", () => {
+    displayModal(modal);
+    const clickedElement = crimeData.find(({ id }) => id === marker.id);
+    console.log(clickedElement);
+  });
+
+  $("#close-modal-btn").click(() => {
+    modal.hide();
+  });
+};
+
+const displayModal = (modal) => {
   $("#modal-crime").text(crimeData[crimeIndex].type);
+  $("#modal-reward").text("£200");
 
   modal.show();
 };
 
 // load resources and reset time, money & score
-
-const resetInfo = () => {
-  $("#money").text(0);
-  $("#time").text(0);
-  $("#score").text(0);
-};
 
 // start and update timer
 
@@ -164,7 +170,9 @@ const onReady = () => {
   resetInfo();
 };
 
+window.initMap = initMap;
 $(document).ready(onReady);
+// modalOnMarker();
 
 // display more crimes on map the longer the time goes on
 
