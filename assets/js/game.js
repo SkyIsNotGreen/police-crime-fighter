@@ -97,21 +97,6 @@ const resetInfo = () => {
   $("#score").text(0);
 };
 
-// display x amount of crimes on map to begin
-
-const getMarkers = (map) => {
-  const marker = new google.maps.Marker({
-    position: crimeData[crimeIndex].position,
-    map: map,
-    id: crimeData[crimeIndex].id,
-  });
-
-  generateInfoWindow(marker);
-  modalOnMarker(marker);
-
-  crimeIndex++;
-};
-
 const generateInfoWindow = (marker) => {
   const infowindow = new google.maps.InfoWindow({
     content:
@@ -134,13 +119,30 @@ const generateInfoWindow = (marker) => {
   });
 };
 
-const modalOnMarker = (marker) => {
-  const modal = $("#myModal");
-  marker.addListener("click", () => {
-    displayModal(modal);
-    const clickedElement = crimeData.find(({ id }) => id === marker.id);
-    console.log(clickedElement);
+// display x amount of crimes on map to begin
+
+const getMarkers = (map) => {
+  const marker = new google.maps.Marker({
+    position: crimeData[crimeIndex].position,
+    map: map,
+    id: crimeData[crimeIndex].id,
   });
+
+  generateInfoWindow(marker);
+
+  const modal = $("#myModal");
+
+  marker.addListener("click", () => {
+    displayModal(modal, marker);
+    const clickedMarkerInfo = crimeData.find(({ id }) => id === marker.id);
+    console.log(clickedMarkerInfo);
+  });
+
+  crimeIndex++;
+};
+
+const closeModal = () => {
+  const modal = $("#myModal");
 
   $("#close-modal-btn").click(() => {
     modal.hide();
@@ -150,8 +152,30 @@ const modalOnMarker = (marker) => {
 const displayModal = (modal) => {
   $("#modal-crime").text(crimeData[crimeIndex].type);
   $("#modal-reward").text("£200");
-
   modal.show();
+  resourceListener(modal);
+};
+
+const resourceListener = (modal) => {
+  $("#choice-officer").click(() => {
+    console.log("Police");
+    modal.hide();
+  });
+  $("#choice-dog").click(() => {
+    console.log("Dog");
+    modal.hide();
+  });
+  $("#choice-car").click(() => {
+    console.log("Car");
+    modal.hide();
+  });
+  $("#choice-helicopter").click(() => {
+    console.log("Helicopter");
+    modal.hide();
+  });
+  $("#choice-cancel").click(() => {
+    modal.hide();
+  });
 };
 
 // load resources and reset time, money & score
@@ -172,7 +196,7 @@ const onReady = () => {
 
 window.initMap = initMap;
 $(document).ready(onReady);
-// modalOnMarker();
+closeModal();
 
 // display more crimes on map the longer the time goes on
 
