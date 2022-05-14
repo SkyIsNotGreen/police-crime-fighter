@@ -1,54 +1,44 @@
-console.log("hello from game");
-
 // game variables
 
-const mapApiKey = "AIzaSyAOCM-c2ZcfA_BS9BZSCd8a-fbiL9hz7a8";
-const crimeData = [];
+const MAP_API_KEY = "AIzaSyAOCM-c2ZcfA_BS9BZSCd8a-fbiL9hz7a8";
+let crimeData = [];
 let score = 0;
 let money = 0;
 let time = 0;
 let crimeIndex = 0;
 let crimeInterval = 2000;
 
-const handleNavBarToggle = () => {
-  const navBurgerBtn = $(".navbar-burger");
-
-  const toggleNavBar = () => {
-    // get the nav container id (the div to show and hide)
-    const navContainerId = navBurgerBtn.attr("data-target");
-    const navContainer = $(`#${navContainerId}`);
-
-    // toggle the class for hamburger button to show/hide
-    navBurgerBtn.toggleClass("is-active");
-
-    // toggle the class for nav container to show/hide
-    navContainer.toggleClass("is-active");
-  };
-
-  navBurgerBtn.click(toggleNavBar);
-};
-
-$(document).ready(async () => {
-  handleNavBarToggle();
-  resetInfo();
-});
-
 // get and display map from Google API
 
 const initMap = async () => {
   // https://developers.google.com/maps/documentation/javascript/interaction
   const birminghamLocation = { lat: 52.474282, lng: -1.898623 };
-  const map = new google.maps.Map(document.getElementById("map"), {
+
+  const mapElement = document.getElementById("map");
+
+  const mapOptions = {
     zoom: 15,
     center: birminghamLocation,
     mapTypeId: "terrain",
     disableDefaultUI: true,
     zoomControl: false,
     gestureHandling: "none",
-  });
-  map.setOptions({ styles: styles["hide"] });
+    styles: [
+      {
+        featureType: "poi.business",
+        stylers: [{ visibility: "off" }],
+      },
+      {
+        featureType: "transit",
+        elementType: "labels.icon",
+        stylers: [{ visibility: "off" }],
+      },
+    ],
+  };
 
-  const sortedPoliceData = await getPoliceData(map);
+  const map = new google.maps.Map(mapElement, mapOptions);
+
+  await renderPoliceData(map);
 
   startTimer();
 
@@ -56,23 +46,6 @@ const initMap = async () => {
 };
 
 window.initMap = initMap;
-
-// google API styles to remove default markers
-
-const styles = {
-  default: [],
-  hide: [
-    {
-      featureType: "poi.business",
-      stylers: [{ visibility: "off" }],
-    },
-    {
-      featureType: "transit",
-      elementType: "labels.icon",
-      stylers: [{ visibility: "off" }],
-    },
-  ],
-};
 
 // get data from police API
 
@@ -96,18 +69,25 @@ const callPoliceApi = async () => {
 
 // sort police data into objects in an array with co-ordinates and crime category
 
-const getPoliceData = async (map) => {
+const renderPoliceData = async (map) => {
+  // get the police data
   const data = await callPoliceApi();
-  for (let i = 0; i < data.length; i++) {
-    const dataObject = {
-      position: new google.maps.LatLng(
-        data[i].location.latitude,
-        data[i].location.longitude
-      ),
-      type: data[i].category,
+
+  // create markers
+  crimeData = data.map((each) => {
+    const latitude = each.location.latitude;
+    const longitude = each.location.longitude;
+    const category = each.category;
+
+    const position = new google.maps.LatLng(latitude, longitude);
+
+    return {
+      position: position,
+      type: category,
+      latitude: latitude,
+      longitude: longitude,
     };
-    crimeData.push(dataObject);
-  }
+  });
 
   // show crime markers at certain intervals
   setInterval(getInitialMarkers, crimeInterval, map);
@@ -120,6 +100,12 @@ const getInitialMarkers = (map) => {
     position: crimeData[crimeIndex].position,
     map: map,
   });
+
+  // marker.addListener("click", () => {
+  //   alert(
+  //     `Lat: ${crimeData[crimeIndex].latitude} | Lon: ${crimeData[crimeIndex].longitude} | Type: ${crimeData[crimeIndex].type}`
+  //   );
+  // });
 
   const infowindow = new google.maps.InfoWindow({
     content: crimeData[crimeIndex].type,
@@ -143,9 +129,9 @@ const getInitialMarkers = (map) => {
 // load resources and reset time, money & score
 
 const resetInfo = () => {
-  $("#money").text(money);
-  $("#time").text(time);
-  $("#score").text(score);
+  $("#money").text(0);
+  $("#time").text(0);
+  $("#score").text(0);
 };
 
 // start and update timer
@@ -156,6 +142,13 @@ const startTimer = () => {
     $("#time").text(time);
   }, 1000);
 };
+
+const onReady = () => {
+  handleNavBarToggle();
+  resetInfo();
+};
+
+$(document).ready(onReady);
 
 // display more crimes on map the longer the time goes on
 
