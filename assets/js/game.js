@@ -161,30 +161,56 @@ const appendModal = () => {
 };
 
 const displayModal = (modal, marker, clickedIndex) => {
-  $("#modal-crime").text(crimeData[clickedIndex].type);
+  const typeOfCrime = crimeData[clickedIndex].type;
+  $("#modal-crime").text(typeOfCrime);
   $("#modal-reward").text("£200");
   appendModal();
   modal.show();
-  resourceListener(modal, marker);
+  resourceListener(modal, marker, typeOfCrime);
 };
 
-const resourceListener = (modal, marker) => {
+const resourceListener = (modal, marker, typeOfCrime) => {
+  console.log(typeOfCrime);
+  const variableIndex = crimeVariables.findIndex(
+    ({ type }) => type === typeOfCrime
+  );
+  const solveTimes = crimeVariables[variableIndex];
+
   $("#choice-officer").click(() => {
-    resourceSelected("Police Officer", 5000, 100, marker);
-    // setTimeout(crimeSolved, 2000, 100, marker);
+    resourceSelected(
+      "Police Officer",
+      solveTimes.officerSolveTime,
+      solveTimes.reward,
+      marker
+    );
     closeModal();
   });
   $("#choice-dog").click(() => {
-    console.log("Dog");
-    modal.hide();
+    resourceSelected(
+      "Police Dog",
+      solveTimes.dogSolveTime,
+      solveTimes.reward,
+      marker
+    );
+    closeModal();
   });
   $("#choice-car").click(() => {
-    console.log("Car");
-    modal.hide();
+    resourceSelected(
+      "Police Car",
+      solveTimes.carSolveTime,
+      solveTimes.reward,
+      marker
+    );
+    closeModal();
   });
   $("#choice-helicopter").click(() => {
-    console.log("Helicopter");
-    modal.hide();
+    resourceSelected(
+      "Police Helicopter",
+      solveTimes.helicopterSolveTime,
+      solveTimes.reward,
+      marker
+    );
+    closeModal();
   });
   $("#choice-cancel").click(() => {
     modal.hide();
@@ -198,7 +224,6 @@ const resourceSelected = (type, timeRemaining, reward, marker) => {
 const crimeSolved = (reward, marker) => {
   marker.setMap(null);
   money += reward;
-  console.log(money + " " + reward);
   updateInfo();
 };
 
