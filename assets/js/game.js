@@ -90,43 +90,56 @@ const renderPoliceData = async (map) => {
   });
 
   // show crime markers at certain intervals
-  setInterval(getInitialMarkers, crimeInterval, map);
+  setInterval(getMarkers, crimeInterval, map);
 };
 
 // display x amount of crimes on map to begin
 
-const getInitialMarkers = (map) => {
+const getMarkers = (map) => {
   const marker = new google.maps.Marker({
     position: crimeData[crimeIndex].position,
     map: map,
   });
 
-  marker.addListener("click", () => {
-    const modal = $("#myModal");
-    modal.show();
+  generateInfoWindow(marker);
 
+  marker.addListener("click", () => {
+    displayModal();
     // alert(
     //   `Lat: ${crimeData[crimeIndex].latitude} | Lon: ${crimeData[crimeIndex].longitude} | Type: ${crimeData[crimeIndex].type}`
     // );
   });
 
-  // const infowindow = new google.maps.InfoWindow({
-  //   content: crimeData[crimeIndex].type,
-  // });
-
-  // marker.addListener("mouseover", () => {
-  //   infowindow.open({
-  //     anchor: marker,
-  //     map,
-  //     shouldFocus: false,
-  //   });
-  // });
-
-  // marker.addListener("mouseout", () => {
-  //   infowindow.close();
-  // });
-
   crimeIndex++;
+};
+
+const generateInfoWindow = (marker) => {
+  const infowindow = new google.maps.InfoWindow({
+    content:
+      "Crime: " +
+      crimeData[crimeIndex].type +
+      "<br>" +
+      "<p>Time Remaining: 4 seconds</p>",
+  });
+
+  marker.addListener("mouseover", () => {
+    infowindow.open({
+      anchor: marker,
+      map,
+      shouldFocus: false,
+    });
+  });
+
+  marker.addListener("mouseout", () => {
+    infowindow.close();
+  });
+};
+
+const displayModal = () => {
+  const modal = $("#myModal");
+  $("#modal-crime").text(crimeData[crimeIndex].type);
+
+  modal.show();
 };
 
 // load resources and reset time, money & score
