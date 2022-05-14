@@ -32,11 +32,41 @@ body {
   background-color: rgba(52, 52, 52, 0.4);
   border-radius: 1rem;
 }
+.game-title {
+  width: 26rem;
+  overflow: hidden;
+  border-right: 0.15em solid var(--red);
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.15em; /* Adjust as needed */
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
 
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--light-coral);
+  }
+}
 .game-title,
 .info-title {
   text-align: center;
 }
+
 .button-div {
   display: flex;
   flex-direction: column;
@@ -61,14 +91,20 @@ h1 {
   margin: 0.5rem;
   box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.5);
   border-radius: 1.7rem;
+  background-color: var(--medium-slate-blue);
+  color: var(--medium-slate-blue);
 }
 .cards:hover {
+  perspective: 1000px;
+  transition: transform 2s;
+  transform-style: preserve-3d;
+  transform: rotateY(360deg);
   width: 20vw;
   margin: 0.5rem;
   box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.5);
   border-radius: 1.7rem;
-  background-color: none;
-  opacity: 0.2px;
+  background-color: white;
+  color: black;
 }
 /* promotional videos  */
 .promo-video {
