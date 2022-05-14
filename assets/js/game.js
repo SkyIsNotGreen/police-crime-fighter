@@ -4,11 +4,11 @@ console.log("hello from game");
 
 const mapApiKey = "AIzaSyAOCM-c2ZcfA_BS9BZSCd8a-fbiL9hz7a8";
 const crimeData = [];
-const score = 0;
-const money = 0;
-const time = 0;
+let score = 0;
+let money = 0;
+let time = 0;
 let crimeIndex = 0;
-let crimeInterval = 1000;
+let crimeInterval = 3000;
 
 const handleNavBarToggle = () => {
   const navBurgerBtn = $(".navbar-burger");
@@ -120,20 +120,42 @@ const getInitialMarkers = (map) => {
     position: crimeData[crimeIndex].position,
     map: map,
   });
+
+  const infowindow = new google.maps.InfoWindow({
+    content: crimeData[crimeIndex].type,
+  });
+
+  marker.addListener("mouseover", () => {
+    infowindow.open({
+      anchor: marker,
+      map,
+      shouldFocus: false,
+    });
+  });
+
+  marker.addListener("mouseout", () => {
+    infowindow.close();
+  });
+
   crimeIndex++;
 };
 
 // load resources and reset time, money & score
 
 const resetInfo = () => {
-  $("#money").text("0");
-  $("#time").text("0");
-  $("#score").text("0");
+  $("#money").text(money);
+  $("#time").text(time);
+  $("#score").text(score);
 };
 
-// start timer
+// start and update timer
 
-const startTimer = () => {};
+const startTimer = () => {
+  window.setInterval(() => {
+    time++;
+    $("#time").text(time);
+  }, 1000);
+};
 
 // display more crimes on map the longer the time goes on
 
