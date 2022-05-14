@@ -164,6 +164,13 @@ li {
   width: 20rem;
   height: 20rem;
 }
+
+/* how to play section police div */
+.police-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
 @media screen and (max-device-width: 596px) and (orientation: portrait) {
   .features {
     display: flex;
