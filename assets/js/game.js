@@ -101,27 +101,30 @@ const getInitialMarkers = (map) => {
     map: map,
   });
 
-  // marker.addListener("click", () => {
-  //   alert(
-  //     `Lat: ${crimeData[crimeIndex].latitude} | Lon: ${crimeData[crimeIndex].longitude} | Type: ${crimeData[crimeIndex].type}`
-  //   );
+  marker.addListener("click", () => {
+    const modal = $("#myModal");
+    modal.show();
+
+    // alert(
+    //   `Lat: ${crimeData[crimeIndex].latitude} | Lon: ${crimeData[crimeIndex].longitude} | Type: ${crimeData[crimeIndex].type}`
+    // );
+  });
+
+  // const infowindow = new google.maps.InfoWindow({
+  //   content: crimeData[crimeIndex].type,
   // });
 
-  const infowindow = new google.maps.InfoWindow({
-    content: crimeData[crimeIndex].type,
-  });
+  // marker.addListener("mouseover", () => {
+  //   infowindow.open({
+  //     anchor: marker,
+  //     map,
+  //     shouldFocus: false,
+  //   });
+  // });
 
-  marker.addListener("mouseover", () => {
-    infowindow.open({
-      anchor: marker,
-      map,
-      shouldFocus: false,
-    });
-  });
-
-  marker.addListener("mouseout", () => {
-    infowindow.close();
-  });
+  // marker.addListener("mouseout", () => {
+  //   infowindow.close();
+  // });
 
   crimeIndex++;
 };
