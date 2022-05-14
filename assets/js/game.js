@@ -1,7 +1,14 @@
 console.log("hello from game");
 
+// game variables
+
 const mapApiKey = "AIzaSyAOCM-c2ZcfA_BS9BZSCd8a-fbiL9hz7a8";
-let crimeData = [];
+const crimeData = [];
+let score = 0;
+let money = 0;
+let time = 0;
+let crimeIndex = 0;
+let crimeInterval = 2000;
 
 const handleNavBarToggle = () => {
   const navBurgerBtn = $(".navbar-burger");
@@ -23,6 +30,7 @@ const handleNavBarToggle = () => {
 
 $(document).ready(async () => {
   handleNavBarToggle();
+  resetInfo();
 });
 
 // get and display map from Google API
@@ -34,13 +42,15 @@ const initMap = async () => {
     zoom: 15,
     center: birminghamLocation,
     mapTypeId: "terrain",
-    disableDefaultUI: false,
-    // zoomControl: true,
-    // gestureHandling: "none",
+    disableDefaultUI: true,
+    zoomControl: false,
+    gestureHandling: "none",
   });
   map.setOptions({ styles: styles["hide"] });
 
   const sortedPoliceData = await getPoliceData(map);
+
+  startTimer();
 
   // getInitialMarkers(map);
 };
@@ -84,6 +94,8 @@ const callPoliceApi = async () => {
   }
 };
 
+// sort police data into objects in an array with co-ordinates and crime category
+
 const getPoliceData = async (map) => {
   const data = await callPoliceApi();
   for (let i = 0; i < data.length; i++) {
@@ -97,26 +109,53 @@ const getPoliceData = async (map) => {
     crimeData.push(dataObject);
   }
 
-  getInitialMarkers(map);
+  // show crime markers at certain intervals
+  setInterval(getInitialMarkers, crimeInterval, map);
 };
 
 // display x amount of crimes on map to begin
 
 const getInitialMarkers = (map) => {
-  console.log(crimeData);
-  for (let i = 0; i < crimeData.length; i++) {
-    const marker = new google.maps.Marker({
-      position: crimeData[i].position,
-      map: map,
-    });
-  }
-};
+  const marker = new google.maps.Marker({
+    position: crimeData[crimeIndex].position,
+    map: map,
+  });
 
-// sort police data into objects in an array with co-ordinates and crime category
+  const infowindow = new google.maps.InfoWindow({
+    content: crimeData[crimeIndex].type,
+  });
+
+  marker.addListener("mouseover", () => {
+    infowindow.open({
+      anchor: marker,
+      map,
+      shouldFocus: false,
+    });
+  });
+
+  marker.addListener("mouseout", () => {
+    infowindow.close();
+  });
+
+  crimeIndex++;
+};
 
 // load resources and reset time, money & score
 
-// start timer
+const resetInfo = () => {
+  $("#money").text(money);
+  $("#time").text(time);
+  $("#score").text(score);
+};
+
+// start and update timer
+
+const startTimer = () => {
+  window.setInterval(() => {
+    time++;
+    $("#time").text(time);
+  }, 1000);
+};
 
 // display more crimes on map the longer the time goes on
 
