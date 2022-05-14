@@ -8,7 +8,7 @@ let score = 0;
 let money = 0;
 let time = 0;
 let crimeIndex = 0;
-let crimeInterval = 3000;
+let crimeInterval = 2000;
 
 const handleNavBarToggle = () => {
   const navBurgerBtn = $(".navbar-burger");
