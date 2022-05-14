@@ -20,7 +20,7 @@
     margin-left: 20px;
     margin-right: 20px;
     justify-content: center;
-    align-items: center;
+
 }
 
 .contacts-banner {
@@ -45,13 +45,35 @@
 
 /* right-side content box */
 .text-splash {
-    display: flex;
     grid-area: "b";
-    padding: 20px;
+    padding-top: 20px;
     text-align: center;
 }
 
 .contactsPage-logo {
     margin: auto;
     max-width: 80%;
+}
+
+@media (max-width: 1500px) {
+
+    .contacts-container {
+        display: grid;
+        grid-template-areas:
+        "a"
+        "b";
+    }
+
+    .contacts-social-links-box {
+        grid-area: "a";
+    }
+
+    .text-splash {
+        grid-area: "b";
+    }
+
+    .contactsPage-logo {
+        max-width: 50%;
+    }
+
 }
