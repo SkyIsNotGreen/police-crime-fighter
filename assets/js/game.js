@@ -7,6 +7,8 @@ const crimeData = [];
 const score = 0;
 const money = 0;
 const time = 0;
+let crimeIndex = 0;
+let crimeInterval = 1000;
 
 const handleNavBarToggle = () => {
   const navBurgerBtn = $(".navbar-burger");
@@ -40,13 +42,15 @@ const initMap = async () => {
     zoom: 15,
     center: birminghamLocation,
     mapTypeId: "terrain",
-    disableDefaultUI: false,
-    // zoomControl: true,
-    // gestureHandling: "none",
+    disableDefaultUI: true,
+    zoomControl: false,
+    gestureHandling: "none",
   });
   map.setOptions({ styles: styles["hide"] });
 
   const sortedPoliceData = await getPoliceData(map);
+
+  startTimer();
 
   // getInitialMarkers(map);
 };
@@ -105,19 +109,18 @@ const getPoliceData = async (map) => {
     crimeData.push(dataObject);
   }
 
-  getInitialMarkers(map);
+  // show crime markers at certain intervals
+  setInterval(getInitialMarkers, crimeInterval, map);
 };
 
 // display x amount of crimes on map to begin
 
 const getInitialMarkers = (map) => {
-  console.log(crimeData);
-  for (let i = 0; i < crimeData.length; i++) {
-    const marker = new google.maps.Marker({
-      position: crimeData[i].position,
-      map: map,
-    });
-  }
+  const marker = new google.maps.Marker({
+    position: crimeData[crimeIndex].position,
+    map: map,
+  });
+  crimeIndex++;
 };
 
 // load resources and reset time, money & score
@@ -129,6 +132,8 @@ const resetInfo = () => {
 };
 
 // start timer
+
+const startTimer = () => {};
 
 // display more crimes on map the longer the time goes on
 
