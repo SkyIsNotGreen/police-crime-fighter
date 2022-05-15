@@ -196,11 +196,11 @@ li {
 
 .speech-bubble-1 {
   width: fit-content;
-  height: fit-content;
+  height: max-content;
   margin: 3rem;
   padding: 5em;
-  background-color: var(--international-orange-engineering);
-  color: white;
+  background-color: black;
+  color: var(--light-coral);
   box-shadow: 0 0 1.5rem rgba(1, 21, 29, 0.5);
 }
 .speech-bubble-container {
@@ -229,5 +229,8 @@ li {
   .container-nav {
     position: relative;
     float: none;
+  }
+  .speech-bubble-1 {
+    margin: 0;
   }
 }
