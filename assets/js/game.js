@@ -42,8 +42,6 @@ const initMap = async () => {
   await renderPoliceData(map);
 
   startTimer();
-
-  // getInitialMarkers(map);
 };
 
 // Get & sort police data into objects in an array extracting relevant information
@@ -70,8 +68,20 @@ const renderPoliceData = async (map) => {
     };
   });
 
+  randomiseArray();
+
   // show crime markers at certain intervals
   setInterval(getMarkers, crimeInterval, map);
+};
+
+const randomiseArray = () => {
+  for (i = crimeData.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    x = crimeData[i];
+    crimeData[i] = crimeData[j];
+    crimeData[j] = x;
+  }
+  return crimeData;
 };
 
 const callPoliceApi = async () => {
@@ -141,7 +151,11 @@ const getMarkers = (map) => {
     modal.hide();
   });
 
-  crimeIndex++;
+  if (crimeIndex <= crimeData.length) {
+    crimeIndex++;
+  } else {
+    crimeIndex = 0;
+  }
 };
 
 // create, display and remove modal
@@ -153,7 +167,7 @@ const closeModal = () => {
   modal.hide();
 };
 
-const appendModal = (solveTimes) => {
+const addModalButtons = (solveTimes) => {
   $("#choice-footer")
     .append(`            <button id="choice-officer" class="button is-success choice-btn">Officer<br>(${
     solveTimes.officerSolveTime / 1000
@@ -178,7 +192,7 @@ const displayModal = (modal, marker, clickedIndex) => {
   const solveTimes = crimeVariables[variableIndex];
   $("#modal-crime").text(typeOfCrime);
   $("#modal-reward").text(`£${solveTimes.reward}`);
-  appendModal(solveTimes);
+  addModalButtons(solveTimes);
   modal.show();
   resourceListener(modal, marker, typeOfCrime, solveTimes);
 };
