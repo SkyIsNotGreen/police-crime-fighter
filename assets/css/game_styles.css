@@ -84,3 +84,8 @@ main {
     background-color: var(--light-coral);
     border-radius: 100%;
 }
+
+.choice-btn {
+    padding: 20px;
+    line-height: 20px;
+}

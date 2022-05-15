@@ -7,6 +7,7 @@ let money = 0;
 let time = 0;
 let crimeIndex = 0;
 let crimeInterval = 2000;
+let infowindow = {};
 
 // get and display map from Google API
 
@@ -98,12 +99,10 @@ const resetInfo = () => {
 };
 
 const generateInfoWindow = (marker) => {
-  const infowindow = new google.maps.InfoWindow({
-    content:
-      "Crime: " +
-      crimeData[crimeIndex].type +
-      "<br>" +
-      "<p>Time Remaining: 4 seconds</p>",
+  infowindow = new google.maps.InfoWindow({
+    content: "Crime: " + crimeData[crimeIndex].type,
+    // "<br>" +
+    // "<p>Time Remaining: 4 seconds</p>",
   });
 
   marker.addListener("mouseover", () => {
@@ -119,13 +118,14 @@ const generateInfoWindow = (marker) => {
   });
 };
 
-// display x amount of crimes on map to begin
+// begin displaying crimes
 
 const getMarkers = (map) => {
   const marker = new google.maps.Marker({
     position: crimeData[crimeIndex].position,
     map: map,
     id: crimeData[crimeIndex].id,
+    // label: "5",
   });
 
   generateInfoWindow(marker);
@@ -144,6 +144,8 @@ const getMarkers = (map) => {
   crimeIndex++;
 };
 
+// create, display and remove modal
+
 const closeModal = () => {
   const modal = $("#crimeModal");
   // marker.removeListener("click");
@@ -151,31 +153,39 @@ const closeModal = () => {
   modal.hide();
 };
 
-const appendModal = () => {
+const appendModal = (solveTimes) => {
   $("#choice-footer")
-    .append(`            <button id="choice-officer" class="button is-success">Officer</button>
-  <button id="choice-dog" class="button is-success">Dog</button>
-  <button id="choice-car" class="button is-success">Car</button>
-  <button id="choice-helicopter" class="button is-success">Helicopter</button>
+    .append(`            <button id="choice-officer" class="button is-success choice-btn">Officer<br>(${
+    solveTimes.officerSolveTime / 1000
+  } secs)</button>
+  <button id="choice-dog" class="button is-success choice-btn">Dog<br>(${
+    solveTimes.dogSolveTime / 1000
+  } secs)</button>
+  <button id="choice-car" class="button is-success choice-btn">Car<br>(${
+    solveTimes.carSolveTime / 1000
+  } secs)</button>
+  <button id="choice-helicopter" class="button is-success choice-btn">Helicopter<br>(${
+    solveTimes.helicopterSolveTime / 1000
+  } secs)</button>
   <button id="choice-cancel" class="button">Cancel</button>`);
 };
 
 const displayModal = (modal, marker, clickedIndex) => {
   const typeOfCrime = crimeData[clickedIndex].type;
-  $("#modal-crime").text(typeOfCrime);
-  $("#modal-reward").text("£200");
-  appendModal();
-  modal.show();
-  resourceListener(modal, marker, typeOfCrime);
-};
-
-const resourceListener = (modal, marker, typeOfCrime) => {
-  console.log(typeOfCrime);
   const variableIndex = crimeVariables.findIndex(
     ({ type }) => type === typeOfCrime
   );
   const solveTimes = crimeVariables[variableIndex];
+  $("#modal-crime").text(typeOfCrime);
+  $("#modal-reward").text(`£${solveTimes.reward}`);
+  appendModal(solveTimes);
+  modal.show();
+  resourceListener(modal, marker, typeOfCrime, solveTimes);
+};
 
+// see which resource was selected and remove marker once crime is solved
+
+const resourceListener = (modal, marker, typeOfCrime, solveTimes) => {
   $("#choice-officer").click(() => {
     resourceSelected(
       "Police Officer",
@@ -213,18 +223,24 @@ const resourceListener = (modal, marker, typeOfCrime) => {
     closeModal();
   });
   $("#choice-cancel").click(() => {
-    modal.hide();
+    closeModal();
   });
 };
 
 const resourceSelected = (type, timeRemaining, reward, marker) => {
   setTimeout(crimeSolved, timeRemaining, reward, marker);
+  // setInterval(crimeClock, 1000, timeRemaining, marker);
 };
 
 const crimeSolved = (reward, marker) => {
   marker.setMap(null);
   money += reward;
   updateInfo();
+};
+
+const crimeClock = (timeRemaining, marker) => {
+  // display countdown until crime is solved
+  console.log(marker.label);
 };
 
 const updateInfo = () => {
