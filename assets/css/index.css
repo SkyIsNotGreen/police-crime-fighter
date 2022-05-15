@@ -202,6 +202,7 @@ li {
   background-color: black;
   color: var(--light-coral);
   box-shadow: 0 0 1.5rem rgba(1, 21, 29, 0.5);
+  display: none;
 }
 .speech-bubble-container {
   background-color: gainsboro;

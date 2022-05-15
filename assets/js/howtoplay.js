@@ -1,5 +1,8 @@
 // render all speech texts
 // object array
+
+let visibleSpeech = 0;
+
 const speech = [
   {
     text: "Hello, I am constable Sam. I am here to eradicate the crime in Birmingham. Unfortunately, I cannot do this alone.",
@@ -37,6 +40,22 @@ const writeToLocalStorage = (key, value) => {
 };
 
 const typeWriterEffect = () => {};
-const renderSpeechAlerts = () => {};
-const startHowToPlay = () => {};
-$(document).ready(startHowToPlay);
+const renderSpeechAlerts = () => {
+  console.log(speechAlerts);
+
+  //   if(){
+
+  //   } else () {
+
+  //   }
+  speech.forEach(renderSpeechAlerts);
+};
+const startHowToPlay = () => {
+  renderSpeechAlerts();
+};
+
+$("#prev").click("showPrevious");
+$("#next").click("showNext");
+$(document).ready(() => {
+  startHowToPlay();
+});
