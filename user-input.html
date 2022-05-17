@@ -24,8 +24,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <title>Game | Police Crime Finder</title>
-    <link rel="stylesheet" href="./assets/css/game_styles.css" />
+    <title>user input | Police Crime Finder</title>
+    <link rel="stylesheet" href="./assets/css/index.css" />
   </head>
   <body>
     <!-- Responsive navbar using bulma/jQuery -->
@@ -58,81 +58,52 @@
         </div>
       </div>
     </nav>
-
     <main>
-      <!-- display map -->
-
-      <div class="map-container">
-        <div class="map-image" id="map"></div>
-        <!-- <img src="./assets/images/map-template.png" alt="map template" class="map-image"> -->
-        <!-- display timer, score, money -->
-        <div class="info-container">
-          <div class="info-item">
-            <p>Money: £<span id="money">500</span></p>
-          </div>
-          <div class="info-item">
-            <p>Time: <span id="time">50</span></p>
-          </div>
-          <div class="info-item">
-            <p>Score: <span id="score">260</span></p>
-          </div>
-        </div>
-        <!-- display crime level -->
-        <div class="crime-level-container">
-          <label>Crime Level:</label>
-          <progress id="file" value="70" max="100">32%</progress>
-        </div>
-
-        <!-- display resources -->
-        <div class="resource-container">
-          <img
-            src="./assets/images/police-man-placeholder.png"
-            alt="police officer resource"
-            class="resource"
-          />
-          <img
-            src="./assets/images/police-dog-placeholder.png"
-            alt="police dog resource"
-            class="resource"
-          />
-          <img
-            src="./assets/images/police-car-placeholder.png"
-            alt="policeman resource"
-            class="resource"
-          />
-          <img
-            src="./assets/images/police-heli-placeholder.png"
-            alt="policeman resource"
-            class="resource"
-          />
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Text input" />
         </div>
       </div>
 
-      <div id="crimeModal" class="modal">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-          <header class="modal-card-head">
-            <p class="modal-card-title">EMERGENCY!</p>
-            <button id="close-modal-btn" class="delete" aria-label="close"></button>
-          </header>
-          <section class="modal-card-body">
-            <h2>Crime: <span id="modal-crime">Anti-Social Behaviour</span></h2>
-            <h3>Reward: <span id="modal-reward">£100</span></h3>
-            <p>Which unit would you like to deploy?</p>
-          </section>
-          <footer id="choice-footer"class="modal-card-foot">
-            <!-- <button id="choice-officer" class="button is-success">Officer</button>
-            <button id="choice-dog" class="button is-success">Dog</button>
-            <button id="choice-car" class="button is-success">Car</button>
-            <button id="choice-helicopter" class="button is-success">Helicopter</button>
-            <button id="choice-cancel" class="button">Cancel</button> -->
-          </footer>
+      <div class="field">
+        <label class="label">Username</label>
+        <div class="control has-icons-left has-icons-right">
+          <input
+            class="input is-danger"
+            type="text"
+            placeholder="Text input"
+            id="input"
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+        <p class="help is-danger" id="enter-username"></p>
+      </div>
+
+      <!-- <div class="field">
+        <label class="label">Subject</label>
+        <div class="control">
+          <div class="select">
+            <select>
+              <option>Select dropdown</option>
+              <option>With options</option>
+            </select>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-link" id="submit">Submit</button>
         </div>
       </div>
     </main>
-
-
-
+    <!-- script links -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
       integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
@@ -145,13 +116,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <!-- maps API link -->
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOCM-c2ZcfA_BS9BZSCd8a-fbiL9hz7a8&v=beta&callback=initMap"
-      defer
-    ></script>
-    <script src="./assets/js/gameVariables.js"></script>
     <script src="./assets/js/navbar.js"></script>
-    <script src="./assets/js/game.js"></script>
+    <script src="./assets/js/userInput.js"></script>
   </body>
 </html>

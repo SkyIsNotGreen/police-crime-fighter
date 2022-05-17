@@ -1,0 +1,79 @@
+:root {
+    --midnight-blue: #01004eff;
+    --duke-blue: #0100a4ff;
+    --blue: #0000feff;
+    --medium-slate-blue: #7d7dffff;
+    --white: #fdfdffff;
+    --light-coral: #ff8182ff;
+    --red: #ff0101ff;
+    --international-orange-engineering: #c00000ff;
+    --maroon-web: #800000ff;
+}
+
+/* grid for displaying main content boxes */
+.contacts-container {
+    display: grid;
+    grid-template-columns: repeat(1 , 1fr);
+    grid-template-rows: 1;
+    grid-template-areas:
+    "a b";
+    margin-left: 20px;
+    margin-right: 20px;
+    justify-content: center;
+
+}
+
+.contacts-banner {
+    background-image: url(/assets/images/police-siren.jpg);
+    background-size: cover;
+    background-position: center;
+    background-color: var(--midnight-blue);
+    padding: 200px;
+}
+/* left-side content box */
+.contacts-social-links-box {
+    grid-area: "a";
+    display: inline;
+}
+
+/* left-side social links */
+.contacts-social {
+    text-align: center;
+    margin: 10px;
+    padding: 5px;
+}
+
+/* right-side content box */
+.text-splash {
+    grid-area: "b";
+    padding-top: 20px;
+    text-align: center;
+}
+
+.contactsPage-logo {
+    margin: auto;
+    max-width: 80%;
+}
+
+@media (max-width: 1500px) {
+
+    .contacts-container {
+        display: grid;
+        grid-template-areas:
+        "a"
+        "b";
+    }
+
+    .contacts-social-links-box {
+        grid-area: "a";
+    }
+
+    .text-splash {
+        grid-area: "b";
+    }
+
+    .contactsPage-logo {
+        max-width: 50%;
+    }
+
+}

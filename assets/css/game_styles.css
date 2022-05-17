@@ -29,11 +29,6 @@ main {
     height: 100 vh;
 }
 
-.map-image {
-    
-}
-
-
 #map {
     margin: 15px;
     height: 80vh;
@@ -88,4 +83,9 @@ main {
     margin: 10px;
     background-color: var(--light-coral);
     border-radius: 100%;
+}
+
+.choice-btn {
+    padding: 20px;
+    line-height: 20px;
 }

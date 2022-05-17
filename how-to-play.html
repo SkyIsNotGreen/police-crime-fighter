@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css"
+      integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Josefin+Sans:wght@400;500;700&family=Lato:wght@100;400;700&family=Poppins:wght@300;400;700&family=Roboto+Condensed:wght@300;400;700&family=Roboto:wght@400;500;700&family=Smokum&family=Source+Sans+Pro:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>How-to-play | Police Crime Finder</title>
+    <link rel="stylesheet" href="./assets/css/index.css" />
+  </head>
+  <body>
+    <main>
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="./index.html">
+            <i class="fa-solid fa-house"></i>
+          </a>
+
+          <a
+            role="button"
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" href="./game.html"> Game </a>
+
+            <a class="navbar-item" href="./scores.html"> Scores </a>
+
+            <a class="navbar-item" href="./contacts.html"> Contacts </a>
+          </div>
+        </div>
+      </nav>
+      <!-- columns -->
+      <div class="message-header close-container">
+        Close To Play
+        <a href="./game.html" class="delete"></a>
+      </div>
+      <div>
+        <div class="columns speeches">
+          <div class="column is-3 police-div">
+            <img
+              src="./assets/images/police-man-placeholder.png"
+              alt=""
+              srcset=""
+            />
+          </div>
+          <div class="column speech-bubble-container">
+            <div class="notification speech-bubble-1">
+              <p id="speech-text">
+                <!-- Hello, I am constable Sam. I am here to eradicate the crime in
+                Birmingham. Unfortunately, I cannot do this alone. -->
+              </p>
+            </div>
+            <div
+              class="pagination container-nav"
+              role="navigation"
+              aria-label="pagination"
+            >
+              <button
+                class="pagination-previous button is-link is-focused"
+                id="previous"
+              >
+                Previous
+              </button>
+              <button
+                class="pagination-next button is-primary is-focused"
+                id="next"
+              >
+                Next
+              </button>
+            </div>
+            <div class="checkbox-do-not-show">
+              <label class="checkbox text-cbx">
+                <input type="checkbox" id="checkbox-check" />
+                Do not show again
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- bubble-2 -->
+      <!-- columns -->
+      <!-- columns -->
+    </main>
+    <!-- script links -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+      integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="./assets/js/navbar.js"></script>
+    <script src="./assets/js/howtoplay.js"></script>
+  </body>
+</html>
