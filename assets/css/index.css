@@ -185,9 +185,15 @@ li {
   padding: 0rem;
   border: solid 0.3rem var(--international-orange-engineering);
  */
+.close-container,
 .speeches {
   border: 2px solid gainsboro;
-  margin: 2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.close-container {
+  background-color: var(--duke-blue);
 }
 .police-div {
   background-color: var(--light-coral);
@@ -202,7 +208,9 @@ li {
   background-color: black;
   color: var(--light-coral);
   box-shadow: 0 0 1.5rem rgba(1, 21, 29, 0.5);
-  display: none;
+}
+div.speech-bubble-1:first-child {
+  display: block;
 }
 .speech-bubble-container {
   background-color: gainsboro;

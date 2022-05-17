@@ -29,55 +29,57 @@
   </head>
   <body>
     <main>
-        <!-- <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="./index.html">
-          <i class="fa-solid fa-house"></i>
-        </a>
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="./index.html">
+            <i class="fa-solid fa-house"></i>
+          </a>
 
-        <a
-          role="button"
-          class="navbar-burger"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navbarBasicExample"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item" href="./game.html"> Game </a>
-
-          <a class="navbar-item" href="./scores.html"> Scores </a>
-
-          <a class="navbar-item" href="./contacts.html"> Contacts </a>
-
+          <a
+            role="button"
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
-      </div>
-    </nav> -->
+
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" href="./game.html"> Game </a>
+
+            <a class="navbar-item" href="./scores.html"> Scores </a>
+
+            <a class="navbar-item" href="./contacts.html"> Contacts </a>
+          </div>
+        </div>
+      </nav>
       <!-- columns -->
+      <div class="message-header close-container">
+        Close To Play
+        <a href="./game.html" class="delete"></a>
+      </div>
       <div>
-      <div class="columns speeches">
-        <div class="column is-3 police-div">
-          <img
-            src="./assets/images/police-man-placeholder.png"
-            alt=""
-            srcset=""
-          />
-        </div>
-
-        <div class="column speech-bubble-container">
-          <div class="notification speech-bubble-1">
-            <button class="delete"></button>
-            <p>
-              Hello, I am constable Sam. I am here to eradicate the crime in Birmingham. Unfortunately, I cannot do this alone.
-            </p>
-        </div>
-        <div
+        <div class="columns speeches">
+          <div class="column is-3 police-div">
+            <img
+              src="./assets/images/police-man-placeholder.png"
+              alt=""
+              srcset=""
+            />
+          </div>
+          <div class="column speech-bubble-container">
+            <div class="notification speech-bubble-1">
+              <p id="speech-text">
+                <!-- Hello, I am constable Sam. I am here to eradicate the crime in
+                Birmingham. Unfortunately, I cannot do this alone. -->
+              </p>
+            </div>
+            <div
               class="pagination container-nav"
               role="navigation"
               aria-label="pagination"
@@ -97,100 +99,15 @@
             </div>
             <div class="checkbox-do-not-show">
               <label class="checkbox text-cbx">
-                <input type="checkbox" />
+                <input type="checkbox" id="checkbox-check" />
                 Do not show again
               </label>
             </div>
           </div>
-      
         </div>
+      </div>
       <!-- bubble-2 -->
       <!-- columns -->
-      <div class="columns speeches">
-        <div class="column is-3 police-div">
-          <img
-            src="./assets/images/police-man-placeholder.png"
-            alt=""
-            srcset=""
-          />
-        </div>
-
-        <div class="column speech-bubble-container">
-          <div class="notification speech-bubble-1">
-            <button class="delete"></button>
-            <p>Here is where you come in. Please help my team and me solve the crime by distributing the resources. Watch out if you go too slow; your progress will be less than 50%, and the game will be over
-            </p>
-            <div
-              class="pagination container-nav"
-              role="navigation"
-              aria-label="pagination"
-            >
-              <button
-                class="pagination-previous button is-link is-focused"
-                id="previous"
-              >
-                Previous
-              </button>
-              <button
-                class="pagination-next button is-primary is-focused"
-                id="next"
-              >
-                Next
-              </button>
-            </div>
-            <div class="checkbox-do-not-show">
-              <label class="checkbox text-cbx">
-                <input type="checkbox" />
-                Do not show again
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- bubble-3 -->
-      <div class="columns speeches">
-        <div class="column is-3 police-div">
-          <img
-            src="./assets/images/police-man-placeholder.png"
-            alt=""
-            srcset=""
-          />
-        </div>
-
-        <div class="column speech-bubble-container">
-          <div class="notification speech-bubble-1">
-            <button class="delete"></button>
-            <p>
-             Make good decisions to earn more money and thereby. Good Luck, I know you will make us proud.<i class="fas fa-thumbs-up"></i>
-            </p>
-            <div
-              class="pagination container-nav"
-              role="navigation"
-              aria-label="pagination"
-            >
-              <button
-                class="pagination-previous button is-link is-focused"
-                id="previous"
-              >
-                Previous
-              </button>
-              <button
-                class="pagination-next button is-primary is-focused"
-                id="next"
-              >
-                Next
-              </button>
-            </div>
-            <div class="checkbox-do-not-show">
-              <label class="checkbox text-cbx">
-                <input type="checkbox" />
-                Do not show again
-              </label>
-            </div>
-          </div>
-          
-        </div>
-      </div>
       <!-- columns -->
     </main>
     <!-- script links -->
@@ -206,7 +123,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <scripts src="./assets/js/navbar.js"></script>
+    <script src="./assets/js/navbar.js"></script>
     <script src="./assets/js/howtoplay.js"></script>
   </body>
 </html>
