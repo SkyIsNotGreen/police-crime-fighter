@@ -13,14 +13,11 @@
 /* grid for displaying main content boxes */
 .contacts-container {
     display: grid;
-    grid-template-columns: repeat(1 , 1fr);
+    grid-template-columns: repeat(1fr 1fr);
     grid-template-rows: 1;
     grid-template-areas:
     "a b";
-    margin-left: 20px;
-    margin-right: 20px;
-    justify-content: center;
-
+    margin: 0 auto;
 }
 
 .contacts-banner {
@@ -33,7 +30,9 @@
 /* left-side content box */
 .contacts-social-links-box {
     grid-area: "a";
-    display: inline;
+    display: flex;
+    flex-direction: column;
+    
 }
 
 /* left-side social links */
@@ -44,32 +43,28 @@
 }
 
 /* right-side content box */
-.text-splash {
+.text-splash-box {
     grid-area: "b";
-    padding-top: 20px;
+    margin: 10px;
+    padding: 5px;
     text-align: center;
+}
+
+.social-text-right {
+    padding: 20px;
 }
 
 .contactsPage-logo {
     margin: auto;
-    max-width: 80%;
+    width: 500px;
+    height: auto;
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 1260px) {
 
     .contacts-container {
-        display: grid;
-        grid-template-areas:
-        "a"
-        "b";
-    }
-
-    .contacts-social-links-box {
-        grid-area: "a";
-    }
-
-    .text-splash {
-        grid-area: "b";
+        display: flex;
+        flex-direction: column-reverse;
     }
 
     .contactsPage-logo {
