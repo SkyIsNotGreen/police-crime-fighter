@@ -1,10 +1,10 @@
 // create a resources object
-const resources = {
-  officer: 20,
-  dog: 15,
-  car: 10,
-  helicopter: 5,
-};
+// const resources = {
+//   officer: 20,
+//   dog: 15,
+//   car: 10,
+//   helicopter: 5,
+// };
 const writeToLocalStorage = (key, value) => {
   // convert value to string
   const stringifiedValue = JSON.stringify(value);
