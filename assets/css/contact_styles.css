@@ -27,11 +27,13 @@
     background-color: var(--midnight-blue);
     padding: 200px;
 }
+
 /* left-side content box */
 .contacts-social-links-box {
     grid-area: "a";
     display: flex;
     flex-direction: column;
+    min-width: 700px;
     
 }
 
@@ -45,9 +47,10 @@
 /* right-side content box */
 .text-splash-box {
     grid-area: "b";
+    text-align: center;
     margin: 10px;
     padding: 5px;
-    text-align: center;
+    width: 900px;
 }
 
 .social-text-right {
@@ -60,12 +63,14 @@
     height: auto;
 }
 
-@media (max-width: 1260px) {
+@media (max-width: 1600px) {
 
     .contacts-container {
         display: flex;
         flex-direction: column-reverse;
+        align-items: center;
     }
+
 
     .contactsPage-logo {
         max-width: 50%;
