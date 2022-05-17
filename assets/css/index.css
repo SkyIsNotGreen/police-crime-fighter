@@ -32,13 +32,22 @@ body {
   background-color: rgba(52, 52, 52, 0.4);
   border-radius: 1rem;
 }
+
+.title-div {
+  position: relative;
+  display: block;
+
+  height: auto;
+  width: auto;
+}
 .game-title {
+  position: relative;
   width: 26rem;
   overflow: hidden;
   border-right: 0.15em solid var(--red);
-  white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: 0.15em; /* Adjust as needed */
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: 0.15em;
   animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
 }
 
@@ -158,12 +167,56 @@ li {
   text-align: center;
   background-color: var(--duke-blue);
   color: white;
-  box-shadow: 0 0 rem rgba(1, 21, 29, 0.5);
+  box-shadow: 0 0 1rem rgba(1, 21, 29, 0.5);
 }
 .github-icon::before {
   width: 20rem;
   height: 20rem;
 }
+
+/* how to play section police div */
+
+.close-container,
+.speeches {
+  border: 2px solid gainsboro;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.close-container {
+  background-color: var(--duke-blue);
+}
+.police-div {
+  background-color: var(--light-coral);
+  box-shadow: 0 0 1rem rgba(1, 21, 29, 0.5);
+}
+
+.speech-bubble-1 {
+  width: fit-content;
+  height: max-content;
+  margin: 3rem;
+  padding: 5em;
+  background-color: black;
+  color: var(--light-coral);
+  box-shadow: 0 0 1.5rem rgba(1, 21, 29, 0.5);
+}
+div.speech-bubble-1:first-child {
+  display: block;
+}
+.speech-bubble-container {
+  background-color: gainsboro;
+}
+.checkbox-do-not-show {
+  position: relative;
+  float: left;
+  margin-top: 2rem;
+}
+.container-nav {
+  position: relative;
+  float: right;
+  padding: 0rem;
+}
+
 @media screen and (max-device-width: 596px) and (orientation: portrait) {
   .features {
     display: flex;
@@ -172,5 +225,12 @@ li {
   .cards {
     width: 95vw;
     margin: 0.5rem;
+  }
+  .container-nav {
+    position: relative;
+    float: none;
+  }
+  .speech-bubble-1 {
+    margin: 0;
   }
 }
