@@ -9,31 +9,101 @@
   --red: #ff0101ff;
   --international-orange-engineering: #c00000ff;
   --maroon-web: #800000ff;
+  --purple: #9c87bc;
 }
 
+/* banner section */
 .leardrBoardColor {
   background-color: var(--medium-slate-blue);
 }
+.bannerContainer {
+  display: flex;
+  flex-direction: row;
+}
+/* fix this amination later */
+.PoliceContainer {
+  width: 30%;
+  height: 100%;
+  transition: transform 1s cubic-bezier(0.075, 0.82, 0.165, 1) 3s;
+}
+.bannerContainer.PoliceContainer {
+  animation: topDown 1s ease-in;
+}
 
-.winnerCardContainer {
+@keyframes topDown {
+  0% {
+    transform: translateX(0);
+  }
+  33% {
+    transform: translateX();
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+.policeImage {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* section to render top three cards */
+.winnerCardContainer {
+  background-color: var(--purple);
+  color: white;
+  width: 100%;
+  height: 20rem;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin: 5rem;
+  align-items: flex-end;
+}
+.goldCardContainer {
+  text-align: center;
+  width: 25%;
+}
+.bronzeCardContainer {
+  text-align: center;
+  width: 25%;
+}
+.silverCardContainer {
+  text-align: center;
+  width: 25%;
+}
+
+.silverCardItem {
+  background-color: #635180;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
+  align-items: center;
+  height: 13rem;
 }
 .goldCardItem {
+  background-color: #635180;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
+  height: 16rem;
 }
-.silverCardItem {
+.bronzeCardItem {
+  background-color: #635180;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
+  height: 10rem;
 }
-.silverCardItem {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+.image {
+  width: 3rem;
+}
+.text {
+  font-family: "Lato", sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 600;
+  font-size: large;
 }
