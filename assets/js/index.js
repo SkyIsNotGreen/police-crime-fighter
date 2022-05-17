@@ -30,7 +30,7 @@ const clickToStart2 = ` <a
                   Click to start
                 </a>`;
 
-if (readFromLocalStorage("keys", "checked")) {
+if (readFromLocalStorage("keys")) {
   $(".button-div").append(clickToStart2);
 } else {
   $(".button-div").append(clickToStart1);
