@@ -33,8 +33,6 @@
     grid-area: "a";
     display: flex;
     flex-direction: column;
-    min-width: 700px;
-    
 }
 
 /* left-side social links */
@@ -42,6 +40,7 @@
     text-align: center;
     margin: 10px;
     padding: 5px;
+    width: 800px;
 }
 
 /* right-side content box */
@@ -59,7 +58,7 @@
 
 .contactsPage-logo {
     margin: auto;
-    width: 500px;
+    width: 300px;
     height: auto;
 }
 
@@ -69,6 +68,10 @@
         display: flex;
         flex-direction: column-reverse;
         align-items: center;
+    }
+
+    .contacts-social-links-box {
+        width: 700px;
     }
 
 
