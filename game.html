@@ -107,9 +107,31 @@
           />
         </div>
       </div>
+
+      <div id="crimeModal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">EMERGENCY!</p>
+            <button id="close-modal-btn" class="delete" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+            <h2>Crime: <span id="modal-crime">Anti-Social Behaviour</span></h2>
+            <h3>Reward: <span id="modal-reward">£100</span></h3>
+            <p>Which unit would you like to deploy?</p>
+          </section>
+          <footer id="choice-footer"class="modal-card-foot">
+            <!-- <button id="choice-officer" class="button is-success">Officer</button>
+            <button id="choice-dog" class="button is-success">Dog</button>
+            <button id="choice-car" class="button is-success">Car</button>
+            <button id="choice-helicopter" class="button is-success">Helicopter</button>
+            <button id="choice-cancel" class="button">Cancel</button> -->
+          </footer>
+        </div>
+      </div>
     </main>
 
-    <!-- maps API link -->
+
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
@@ -123,10 +145,12 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <!-- maps API link -->
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOCM-c2ZcfA_BS9BZSCd8a-fbiL9hz7a8&v=beta&callback=initMap"
       defer
     ></script>
+    <script src="./assets/js/gameVariables.js"></script>
     <script src="./assets/js/navbar.js"></script>
     <script src="./assets/js/game.js"></script>
   </body>

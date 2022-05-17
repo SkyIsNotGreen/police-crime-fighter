@@ -1,5 +1,14 @@
 // game variables
 
+// add the start game form
+// on submit create game object and store in LS and then render map as current implementation
+
+// on click on modal read from LS and add buttons with remaining resources (10 offices | 3 helicopters, etc)
+
+// on click of a resource button (officer) start a timer and add a callback function
+
+// in callback function console log after x seconds
+
 const MAP_API_KEY = "AIzaSyAOCM-c2ZcfA_BS9BZSCd8a-fbiL9hz7a8";
 let crimeData = [];
 let score = 0;
@@ -41,13 +50,47 @@ const initMap = async () => {
   await renderPoliceData(map);
 
   startTimer();
-
-  // getInitialMarkers(map);
 };
 
-window.initMap = initMap;
+// Get & sort police data into objects in an array extracting relevant information
 
-// get data from police API
+const renderPoliceData = async (map) => {
+  // get the police data
+  const data = await callPoliceApi();
+
+  // create markers
+  crimeData = data.map((each) => {
+    const latitude = each.location.latitude;
+    const longitude = each.location.longitude;
+    const category = each.category;
+    const id = each.id;
+
+    const position = new google.maps.LatLng(latitude, longitude);
+
+    return {
+      position: position,
+      type: category,
+      latitude: latitude,
+      longitude: longitude,
+      id: id,
+    };
+  });
+
+  randomiseArray();
+
+  // show crime markers at certain intervals
+  setInterval(getMarkers, crimeInterval, map);
+};
+
+const randomiseArray = () => {
+  for (i = crimeData.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    x = crimeData[i];
+    crimeData[i] = crimeData[j];
+    crimeData[j] = x;
+  }
+  return crimeData;
+};
 
 const callPoliceApi = async () => {
   try {
@@ -67,52 +110,21 @@ const callPoliceApi = async () => {
   }
 };
 
-// sort police data into objects in an array with co-ordinates and crime category
-
-const renderPoliceData = async (map) => {
-  // get the police data
-  const data = await callPoliceApi();
-
-  // create markers
-  crimeData = data.map((each) => {
-    const latitude = each.location.latitude;
-    const longitude = each.location.longitude;
-    const category = each.category;
-
-    const position = new google.maps.LatLng(latitude, longitude);
-
-    return {
-      position: position,
-      type: category,
-      latitude: latitude,
-      longitude: longitude,
-    };
-  });
-
-  // show crime markers at certain intervals
-  setInterval(getInitialMarkers, crimeInterval, map);
+const resetInfo = () => {
+  $("#money").text(0);
+  $("#time").text(0);
+  $("#score").text(0);
 };
 
-// display x amount of crimes on map to begin
-
-const getInitialMarkers = (map) => {
-  const marker = new google.maps.Marker({
-    position: crimeData[crimeIndex].position,
-    map: map,
-  });
-
-  // marker.addListener("click", () => {
-  //   alert(
-  //     `Lat: ${crimeData[crimeIndex].latitude} | Lon: ${crimeData[crimeIndex].longitude} | Type: ${crimeData[crimeIndex].type}`
-  //   );
-  // });
-
-  const infowindow = new google.maps.InfoWindow({
-    content: crimeData[crimeIndex].type,
+const generateInfoWindow = (marker) => {
+  const infoWindow = new google.maps.InfoWindow({
+    content: "Crime: " + crimeData[crimeIndex].type,
+    // "<br>" +
+    // "<p>Time Remaining: 4 seconds</p>",
   });
 
   marker.addListener("mouseover", () => {
-    infowindow.open({
+    infoWindow.open({
       anchor: marker,
       map,
       shouldFocus: false,
@@ -120,19 +132,146 @@ const getInitialMarkers = (map) => {
   });
 
   marker.addListener("mouseout", () => {
-    infowindow.close();
+    infoWindow.close();
+  });
+};
+
+// begin displaying crimes
+
+const getMarkers = (map) => {
+  const marker = new google.maps.Marker({
+    position: crimeData[crimeIndex].position,
+    map: map,
+    id: crimeData[crimeIndex].id,
+    // label: "5",
   });
 
-  crimeIndex++;
+  generateInfoWindow(marker);
+
+  const modal = $("#crimeModal");
+
+  marker.addListener("click", () => {
+    const clickedIndex = crimeData.findIndex(({ id }) => id === marker.id);
+    displayModal(modal, marker, clickedIndex);
+  });
+
+  $("#close-modal-btn").click(() => {
+    modal.hide();
+  });
+
+  if (crimeIndex <= crimeData.length) {
+    crimeIndex++;
+  } else {
+    crimeIndex = 0;
+  }
+};
+
+// create, display and remove modal
+
+const closeModal = () => {
+  const modal = $("#crimeModal");
+  // marker.removeListener("click");
+  $("#choice-footer").empty();
+  modal.hide();
+};
+
+const addModalButtons = (solveTimes) => {
+  $("#choice-footer")
+    .append(`<button id="choice-officer" class="button is-success choice-btn">Officer<br>(${
+    solveTimes.officerSolveTime / 1000
+  } secs)</button>
+  <button id="choice-dog" class="button is-success choice-btn">Dog<br>(${
+    solveTimes.dogSolveTime / 1000
+  } secs)</button>
+  <button id="choice-car" class="button is-success choice-btn">Car<br>(${
+    solveTimes.carSolveTime / 1000
+  } secs)</button>
+  <button id="choice-helicopter" class="button is-success choice-btn">Helicopter<br>(${
+    solveTimes.helicopterSolveTime / 1000
+  } secs)</button>
+  <button id="choice-cancel" class="button">Cancel</button>`);
+};
+
+const displayModal = (modal, marker, clickedIndex) => {
+  const typeOfCrime = crimeData[clickedIndex].type;
+  const variableIndex = crimeVariables.findIndex(
+    ({ type }) => type === typeOfCrime
+  );
+  const solveTimes = crimeVariables[variableIndex];
+  $("#modal-crime").text(typeOfCrime);
+  $("#modal-reward").text(`£${solveTimes.reward}`);
+  $("#choice-footer").empty();
+  addModalButtons(solveTimes);
+  modal.show();
+  resourceListener(modal, marker, typeOfCrime, solveTimes);
+};
+
+// see which resource was selected and remove marker once crime is solved
+
+const resourceListener = (modal, marker, typeOfCrime, solveTimes) => {
+  $("#choice-officer").click(() => {
+    resourceSelected(
+      "Police Officer",
+      solveTimes.officerSolveTime,
+      solveTimes.reward,
+      marker
+    );
+    closeModal();
+  });
+  $("#choice-dog").click(() => {
+    resourceSelected(
+      "Police Dog",
+      solveTimes.dogSolveTime,
+      solveTimes.reward,
+      marker
+    );
+    closeModal();
+  });
+  $("#choice-car").click(() => {
+    resourceSelected(
+      "Police Car",
+      solveTimes.carSolveTime,
+      solveTimes.reward,
+      marker
+    );
+    closeModal();
+  });
+  $("#choice-helicopter").click(() => {
+    resourceSelected(
+      "Police Helicopter",
+      solveTimes.helicopterSolveTime,
+      solveTimes.reward,
+      marker
+    );
+    closeModal();
+  });
+  $("#choice-cancel").click(() => {
+    closeModal();
+  });
+};
+
+const resourceSelected = (type, timeRemaining, reward, marker) => {
+  setTimeout(crimeSolved, timeRemaining, reward, marker);
+  // setInterval(crimeClock, 1000, timeRemaining, marker);
+};
+
+const crimeSolved = (reward, marker) => {
+  marker.setMap(null);
+  money += reward;
+  updateInfo();
+};
+
+const crimeClock = (timeRemaining, marker) => {
+  // display countdown until crime is solved
+  console.log(marker.label);
+};
+
+const updateInfo = () => {
+  $("#money").text(money);
+  $("#score").text(score);
 };
 
 // load resources and reset time, money & score
-
-const resetInfo = () => {
-  $("#money").text(0);
-  $("#time").text(0);
-  $("#score").text(0);
-};
 
 // start and update timer
 
@@ -148,6 +287,7 @@ const onReady = () => {
   resetInfo();
 };
 
+window.initMap = initMap;
 $(document).ready(onReady);
 
 // display more crimes on map the longer the time goes on
