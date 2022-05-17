@@ -41,71 +41,6 @@ const writeToLocalStorage = (key, value) => {
 
 const typeWriterEffect = () => {};
 
-//   const speechDiv = ` <div class="notification speech-bubble-1">
-//             <button class="delete"></button>
-//             <p>${speech.text}</p>
-//             </div>`;
-//   const showNext = () => {
-//     $(".column speech-bubble-container").append(speechDiv);
-//   };
-// $(document).ready(function () {
-//   $(".notification speech-bubble-1").each(function (e) {
-//     if (e != 0) $(this).hide();
-//   });
-//   const showNext = () => {
-//     if ($(".notification speech-bubble-1:visible").next().length != 0)
-//       $(".notification speech-bubble-1:visible").next().show().prev().hide();
-//     else {
-//       $(".notification speech-bubble-1:visible").hide();
-//       $(".notification speech-bubble-1:first").show();
-//     }
-//     return false;
-//   };
-
-//   const showPrevious = () => {
-//     if ($(".notification speech-bubble-1:visible").prev().length != 0)
-//       $(".notification speech-bubble-1:visible").prev().show().next().hide();
-//     else {
-//       $(".notification speech-bubble-1:visible").hide();
-//       $(".notification speech-bubble-1:last").show();
-//     }
-//     return false;
-//   };
-
-//   );
-
-//   //   const showNext = () => {
-//   //     let nextDiv = $(this)
-//   //       .parent()
-//   //       .find(".notification speech-bubble-1:visible");
-//   //       console.log(find(".notification speech-bubble-1:visible"))
-//   //     if (nextDiv.length === 0) {
-//   //       nextDiv = $(this).parent().find(".notification speech-bubble-1:first");
-//   //     }
-//   //     $(this).parent().find("notification speech-bubble-1").hide();
-//   //     nextDiv.show();
-//   //   };
-
-//   //   const showPrevious = () => {
-//   //     let prevDiv = $(this)
-//   //       .parent()
-//   //       .find(".notification speech-bubble-1:visible")
-//   //       .prev(".notification speech-bubble-1");
-//   //     if (prevDiv.length === 0) {
-//   //       // wrap around to end
-//   //       prevDiv = $(this).parent().find(".notification speech-bubble-1:last");
-//   //     }
-//   //     $(this).parent().find(".notification speech-bubble-1").hide();
-//   //     prevDiv.show();
-//   //     console.log("previous");
-
-//   //   if(){
-
-//   //   } else () {
-
-//   //   }
-// });
-
 const renderSpeechAlerts = () => {
   console.log("hello");
   const speechText = $("#speech-text");
@@ -126,13 +61,22 @@ const showPrevious = () => {
   renderSpeechAlerts();
 };
 
+const checkboxChecked = () => {
+  if ($("input:checked")) {
+    return writeToLocalStorage("keys", "checked");
+  } else {
+    return writeToLocalStorage("", "");
+  }
+};
 $("#next").click(showNext);
 $("#previous").click(showPrevious);
+$("input").click(checkboxChecked);
 
 const startHowToPlay = () => {
   handleNavBarToggle();
   renderSpeechAlerts();
 };
+
 $(document).ready(() => {
   startHowToPlay();
 });
