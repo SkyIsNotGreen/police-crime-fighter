@@ -49,10 +49,17 @@
 
 /* section to render top three cards */
 .winnerCardContainer {
-  background-color: var(--purple);
+  background-image: linear-gradient(
+      to bottom,
+      rgba(182, 134, 168, 0.5),
+      rgba(0, 0, 255, 0.5)
+    ),
+    url(../images/crime-banner-photo.jpeg);
+  background-size: cover;
+  object-fit: cover;
   color: white;
   width: 100%;
-  height: 20rem;
+  height: 25rem;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -106,4 +113,5 @@
   font-family: "Source Sans Pro", sans-serif;
   font-weight: 600;
   font-size: large;
+  color: white;
 }
