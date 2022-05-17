@@ -1,5 +1,14 @@
 // game variables
 
+// add the start game form
+// on submit create game object and store in LS and then render map as current implementation
+
+// on click on modal read from LS and add buttons with remaining resources (10 offices | 3 helicopters, etc)
+
+// on click of a resource button (officer) start a timer and add a callback function
+
+// in callback function console log after x seconds
+
 const MAP_API_KEY = "AIzaSyAOCM-c2ZcfA_BS9BZSCd8a-fbiL9hz7a8";
 let crimeData = [];
 let score = 0;
@@ -7,7 +16,6 @@ let money = 0;
 let time = 0;
 let crimeIndex = 0;
 let crimeInterval = 2000;
-let infowindow = {};
 
 // get and display map from Google API
 
@@ -109,14 +117,14 @@ const resetInfo = () => {
 };
 
 const generateInfoWindow = (marker) => {
-  infowindow = new google.maps.InfoWindow({
+  const infoWindow = new google.maps.InfoWindow({
     content: "Crime: " + crimeData[crimeIndex].type,
     // "<br>" +
     // "<p>Time Remaining: 4 seconds</p>",
   });
 
   marker.addListener("mouseover", () => {
-    infowindow.open({
+    infoWindow.open({
       anchor: marker,
       map,
       shouldFocus: false,
@@ -124,7 +132,7 @@ const generateInfoWindow = (marker) => {
   });
 
   marker.addListener("mouseout", () => {
-    infowindow.close();
+    infoWindow.close();
   });
 };
 
@@ -169,7 +177,7 @@ const closeModal = () => {
 
 const addModalButtons = (solveTimes) => {
   $("#choice-footer")
-    .append(`            <button id="choice-officer" class="button is-success choice-btn">Officer<br>(${
+    .append(`<button id="choice-officer" class="button is-success choice-btn">Officer<br>(${
     solveTimes.officerSolveTime / 1000
   } secs)</button>
   <button id="choice-dog" class="button is-success choice-btn">Dog<br>(${
@@ -192,6 +200,7 @@ const displayModal = (modal, marker, clickedIndex) => {
   const solveTimes = crimeVariables[variableIndex];
   $("#modal-crime").text(typeOfCrime);
   $("#modal-reward").text(`£${solveTimes.reward}`);
+  $("#choice-footer").empty();
   addModalButtons(solveTimes);
   modal.show();
   resourceListener(modal, marker, typeOfCrime, solveTimes);
