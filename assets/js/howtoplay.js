@@ -46,8 +46,6 @@ const renderSpeechAlerts = () => {
   const speechText = $("#speech-text");
   const speechToDisplay = speech[speechIndex].text;
   speechText.text(speechToDisplay);
-  // $(".notification").hide();x
-  // $(".notification:eq(" + visibleDiv + ")").show();
 };
 const showNext = () => {
   console.log(speechIndex);
