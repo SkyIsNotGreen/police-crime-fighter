@@ -116,6 +116,12 @@ const resetInfo = () => {
   $("#score").text(0);
 };
 
+const getRemainingResources = () => {
+  console.log("Getting resources");
+  const remainingResources = readFromLocalStorage("resources", {});
+  console.log(remainingResources);
+};
+
 const generateInfoWindow = (marker) => {
   const infoWindow = new google.maps.InfoWindow({
     content: "Crime: " + crimeData[crimeIndex].type,
@@ -211,7 +217,7 @@ const displayModal = (modal, marker, clickedIndex) => {
 const resourceListener = (modal, marker, typeOfCrime, solveTimes) => {
   $("#choice-officer").click(() => {
     resourceSelected(
-      "Police Officer",
+      "officer",
       solveTimes.officerSolveTime,
       solveTimes.reward,
       marker
@@ -219,26 +225,16 @@ const resourceListener = (modal, marker, typeOfCrime, solveTimes) => {
     closeModal();
   });
   $("#choice-dog").click(() => {
-    resourceSelected(
-      "Police Dog",
-      solveTimes.dogSolveTime,
-      solveTimes.reward,
-      marker
-    );
+    resourceSelected("dog", solveTimes.dogSolveTime, solveTimes.reward, marker);
     closeModal();
   });
   $("#choice-car").click(() => {
-    resourceSelected(
-      "Police Car",
-      solveTimes.carSolveTime,
-      solveTimes.reward,
-      marker
-    );
+    resourceSelected("car", solveTimes.carSolveTime, solveTimes.reward, marker);
     closeModal();
   });
   $("#choice-helicopter").click(() => {
     resourceSelected(
-      "Police Helicopter",
+      "helicopter",
       solveTimes.helicopterSolveTime,
       solveTimes.reward,
       marker
@@ -251,14 +247,28 @@ const resourceListener = (modal, marker, typeOfCrime, solveTimes) => {
 };
 
 const resourceSelected = (type, timeRemaining, reward, marker) => {
-  setTimeout(crimeSolved, timeRemaining, reward, marker);
+  removeResource(type);
+  setTimeout(crimeSolved, timeRemaining, reward, marker, type);
   // setInterval(crimeClock, 1000, timeRemaining, marker);
 };
 
-const crimeSolved = (reward, marker) => {
+const removeResource = (type) => {
+  const remainingResources = readFromLocalStorage("resources", {});
+  remainingResources[type]--;
+  writeToLocalStorage("resources", remainingResources);
+};
+
+const addResource = (type) => {
+  const remainingResources = readFromLocalStorage("resources", {});
+  remainingResources[type]++;
+  writeToLocalStorage("resources", remainingResources);
+};
+
+const crimeSolved = (reward, marker, type) => {
   marker.setMap(null);
   money += reward;
   updateInfo();
+  addResource(type);
 };
 
 const crimeClock = (timeRemaining, marker) => {
@@ -271,7 +281,39 @@ const updateInfo = () => {
   $("#score").text(score);
 };
 
-// load resources and reset time, money & score
+const resetResources = () => {
+  const initialResources = {
+    officer: 20,
+    dog: 15,
+    car: 10,
+    helicopter: 5,
+  };
+  writeToLocalStorage("resources", initialResources);
+};
+
+// local storage
+
+const readFromLocalStorage = (key, defaultValue) => {
+  // get from LS using key name
+  const dataFromLS = localStorage.getItem(key);
+
+  // parse data from LS
+  const parsedData = JSON.parse(dataFromLS);
+
+  if (parsedData) {
+    return parsedData;
+  } else {
+    return defaultValue;
+  }
+};
+
+const writeToLocalStorage = (key, value) => {
+  // convert value to string
+  const stringifiedValue = JSON.stringify(value);
+
+  // set stringified value to LS for key name
+  localStorage.setItem(key, stringifiedValue);
+};
 
 // start and update timer
 
@@ -285,6 +327,7 @@ const startTimer = () => {
 const onReady = () => {
   handleNavBarToggle();
   resetInfo();
+  resetResources();
 };
 
 window.initMap = initMap;
