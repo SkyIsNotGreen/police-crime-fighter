@@ -77,6 +77,13 @@ main {
 
 }
 
+.resource-counter-officer, .resource-counter-dog, 
+.resource-counter-car, .resource-counter-heli {
+    padding-left: 20px;
+    color: var(--white);
+
+}
+
 .resource {
     width: 70px;
     height: 70px;
