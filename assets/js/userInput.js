@@ -31,7 +31,7 @@ const onSubmit = () => {
   writeToLocalStorage("username", value);
   if (readFromLocalStorage("username")) {
     $("#enter-username").remove();
-    writeToLocalStorage("resources", resources);
+    window.location.href = "./game.html";
   } else {
     $("#enter-username").text("please enter username to continue");
   }
