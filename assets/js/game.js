@@ -13,6 +13,11 @@ let totalCrimes = 0;
 let solvedCrimes = 0;
 let crimeInterval = 2000;
 
+// timers
+let markerTimer;
+let gameTimer;
+let resourceTimer;
+
 // get and display map from Google API
 
 const initMap = async () => {
@@ -74,7 +79,7 @@ const renderPoliceData = async (map) => {
   randomiseArray();
 
   // show crime markers at certain intervals
-  setInterval(getMarkers, crimeInterval, map);
+  markerTimer = setInterval(getMarkers, crimeInterval, map);
 };
 
 const randomiseArray = () => {
@@ -156,6 +161,7 @@ const resetResources = () => {
 // begin displaying crimes
 
 const getMarkers = (map) => {
+  console.log(crimeData[crimeIndex].position);
   const marker = new google.maps.Marker({
     position: crimeData[crimeIndex].position,
     map: map,
@@ -260,8 +266,23 @@ const resourceSelected = (type, timeRemaining, reward, marker, map) => {
   if (removeResource(type)) {
     console.log(marker);
     // createSolvingMarker(marker, map);
-    setTimeout(crimeSolved, timeRemaining, reward, marker, type);
+    resourceTimer = setTimeout(
+      crimeSolved,
+      timeRemaining,
+      reward,
+      marker,
+      type
+    );
+    marker.setVisible(false);
+
     closeModal();
+
+    // const newMarker = new google.maps.Marker({
+    //   position: marker.position,
+    //   map: map,
+    //   id: marker.id,
+    //   // label: "5",
+    // });
   }
 
   // setInterval(crimeClock, 1000, timeRemaining, marker);
@@ -314,11 +335,12 @@ const createSolvingMarker = (marker, map) => {
 // when crime is completed
 
 const crimeSolved = (reward, marker, type) => {
-  marker.setMap(null);
+  // marker.setMap(null);
   resources.money += reward;
   solvedCrimes++;
   updateInfo();
   addResource(type);
+  clearTimeout(resourceTimer);
 };
 
 const crimeClock = (timeRemaining, marker) => {
@@ -330,7 +352,7 @@ const updateCrimeMeter = () => {
   totalCrimes++;
   const crimeValue = totalCrimes - solvedCrimes;
   $("#crime-level").val(crimeValue);
-  if (crimeValue >= 5) {
+  if (crimeValue >= 25) {
     gameOver();
   }
   return totalCrimes;
@@ -349,7 +371,8 @@ const gameOver = () => {
   // display something to tell user the game has stopped and give option to move to highscores page
 
   console.log("Game Over");
-  window.clearTimeout();
+  clearInterval(markerTimer);
+  clearInterval(gameTimer);
 };
 
 // local storage
@@ -386,13 +409,14 @@ const refreshCounters = (resources) => {
 // start and update timer
 
 const startTimer = () => {
-  window.setInterval(() => {
+  gameTimer = setInterval(() => {
     resources.time++;
     $("#time").text(resources.time);
   }, 1000);
 };
 
 const onReady = () => {
+  gameInProgress = true;
   handleNavBarToggle();
   resetInfo();
   resetResources();
