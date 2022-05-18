@@ -255,12 +255,14 @@ const resourceSelected = (type, timeRemaining, reward, marker) => {
 const removeResource = (type) => {
   const remainingResources = readFromLocalStorage("resources", {});
   remainingResources[type]--;
+  refreshCounters(remainingResources);
   writeToLocalStorage("resources", remainingResources);
 };
 
 const addResource = (type) => {
   const remainingResources = readFromLocalStorage("resources", {});
   remainingResources[type]++;
+  refreshCounters(remainingResources);
   writeToLocalStorage("resources", remainingResources);
 };
 
@@ -288,6 +290,7 @@ const resetResources = () => {
     car: 10,
     helicopter: 5,
   };
+  refreshCounters(initialResources);
   writeToLocalStorage("resources", initialResources);
 };
 
@@ -313,6 +316,13 @@ const writeToLocalStorage = (key, value) => {
 
   // set stringified value to LS for key name
   localStorage.setItem(key, stringifiedValue);
+};
+
+const refreshCounters = (resources) => {
+  $("#officer-counter").text(resources.officer);
+  $("#dog-counter").text(resources.dog);
+  $("#car-counter").text(resources.car);
+  $("#helicopter-counter").text(resources.helicopter);
 };
 
 // start and update timer
