@@ -1,20 +1,16 @@
 // game variables
 
-// add the start game form
-// on submit create game object and store in LS and then render map as current implementation
-
-// on click on modal read from LS and add buttons with remaining resources (10 offices | 3 helicopters, etc)
-
-// on click of a resource button (officer) start a timer and add a callback function
-
-// in callback function console log after x seconds
-
 const MAP_API_KEY = "AIzaSyAOCM-c2ZcfA_BS9BZSCd8a-fbiL9hz7a8";
 let crimeData = [];
+let resources = {
+  score: 0,
+  money: 0,
+  time: 0,
+};
 let score = 0;
-let money = 0;
-let time = 0;
 let crimeIndex = 0;
+let totalCrimes = 0;
+let solvedCrimes = 0;
 let crimeInterval = 2000;
 
 // get and display map from Google API
@@ -30,11 +26,10 @@ const initMap = async () => {
     center: birminghamLocation,
     mapTypeId: "terrain",
     disableDefaultUI: true,
-    zoomControl: false,
-    gestureHandling: "none",
+    zoomControl: true,
     styles: [
       {
-        featureType: "poi.business",
+        featureType: "poi",
         stylers: [{ visibility: "off" }],
       },
       {
@@ -110,6 +105,8 @@ const callPoliceApi = async () => {
   }
 };
 
+// reset game data
+
 const resetInfo = () => {
   $("#money").text(0);
   $("#time").text(0);
@@ -142,6 +139,20 @@ const generateInfoWindow = (marker) => {
   });
 };
 
+const resetResources = () => {
+  const getUserName = localStorage.getItem("username");
+  const initialResources = {
+    officer: 20,
+    dog: 15,
+    car: 10,
+    helicopter: 2,
+    user: getUserName,
+    crimesSolved: 0,
+  };
+  refreshCounters(initialResources);
+  writeToLocalStorage("resources", initialResources);
+};
+
 // begin displaying crimes
 
 const getMarkers = (map) => {
@@ -158,12 +169,14 @@ const getMarkers = (map) => {
 
   marker.addListener("click", () => {
     const clickedIndex = crimeData.findIndex(({ id }) => id === marker.id);
-    displayModal(modal, marker, clickedIndex);
+    displayModal(modal, marker, clickedIndex, map);
   });
 
   $("#close-modal-btn").click(() => {
     modal.hide();
   });
+
+  updateCrimeMeter();
 
   if (crimeIndex <= crimeData.length) {
     crimeIndex++;
@@ -198,7 +211,7 @@ const addModalButtons = (solveTimes) => {
   <button id="choice-cancel" class="button">Cancel</button>`);
 };
 
-const displayModal = (modal, marker, clickedIndex) => {
+const displayModal = (modal, marker, clickedIndex, map) => {
   const typeOfCrime = crimeData[clickedIndex].type;
   const variableIndex = crimeVariables.findIndex(
     ({ type }) => type === typeOfCrime
@@ -210,12 +223,12 @@ const displayModal = (modal, marker, clickedIndex) => {
   $("#insufficient-resources-error").remove();
   addModalButtons(solveTimes);
   modal.show();
-  resourceListener(modal, marker, typeOfCrime, solveTimes);
+  resourceListener(modal, marker, typeOfCrime, solveTimes, map);
 };
 
 // see which resource was selected and remove marker once crime is solved
 
-const resourceListener = (modal, marker, typeOfCrime, solveTimes) => {
+const resourceListener = (modal, marker, typeOfCrime, solveTimes, map) => {
   $("#choice-officer").click(() => {
     resourceSelected(
       "officer",
@@ -243,8 +256,10 @@ const resourceListener = (modal, marker, typeOfCrime, solveTimes) => {
   });
 };
 
-const resourceSelected = (type, timeRemaining, reward, marker) => {
+const resourceSelected = (type, timeRemaining, reward, marker, map) => {
   if (removeResource(type)) {
+    console.log(marker);
+    // createSolvingMarker(marker, map);
     setTimeout(crimeSolved, timeRemaining, reward, marker, type);
     closeModal();
   }
@@ -268,6 +283,7 @@ const removeResource = (type) => {
 const addResource = (type) => {
   const remainingResources = readFromLocalStorage("resources", {});
   remainingResources[type]++;
+  remainingResources["crimesSolved"]++;
   refreshCounters(remainingResources);
   writeToLocalStorage("resources", remainingResources);
 };
@@ -285,9 +301,22 @@ const insufficientResources = () => {
   );
 };
 
+const createSolvingMarker = (marker, map) => {
+  console.log("Here");
+  new google.maps.Marker({
+    position: marker.position,
+    map: map,
+    id: marker.id,
+    label: "5",
+  });
+};
+
+// when crime is completed
+
 const crimeSolved = (reward, marker, type) => {
   marker.setMap(null);
-  money += reward;
+  resources.money += reward;
+  solvedCrimes++;
   updateInfo();
   addResource(type);
 };
@@ -297,20 +326,30 @@ const crimeClock = (timeRemaining, marker) => {
   console.log(marker.label);
 };
 
-const updateInfo = () => {
-  $("#money").text(money);
-  $("#score").text(score);
+const updateCrimeMeter = () => {
+  totalCrimes++;
+  const crimeValue = totalCrimes - solvedCrimes;
+  $("#crime-level").val(crimeValue);
+  if (crimeValue >= 5) {
+    gameOver();
+  }
+  return totalCrimes;
 };
 
-const resetResources = () => {
-  const initialResources = {
-    officer: 20,
-    dog: 15,
-    car: 10,
-    helicopter: 2,
-  };
-  refreshCounters(initialResources);
-  writeToLocalStorage("resources", initialResources);
+const updateInfo = () => {
+  $("#money").text(resources.money);
+  $("#score").text(resources.score);
+};
+
+const gameOver = () => {
+  // stop all timers
+
+  // get time value & money & set to local storage
+
+  // display something to tell user the game has stopped and give option to move to highscores page
+
+  console.log("Game Over");
+  window.clearTimeout();
 };
 
 // local storage
@@ -348,8 +387,8 @@ const refreshCounters = (resources) => {
 
 const startTimer = () => {
   window.setInterval(() => {
-    time++;
-    $("#time").text(time);
+    resources.time++;
+    $("#time").text(resources.time);
   }, 1000);
 };
 
@@ -361,11 +400,3 @@ const onReady = () => {
 
 window.initMap = initMap;
 $(document).ready(onReady);
-
-// display more crimes on map the longer the time goes on
-
-// when resource is placed, work out radius and solvable crimes generating in that radius
-
-// when crime is solved, increase money and score and remove crime from map
-
-// create map
