@@ -1,10 +1,10 @@
 // create a resources object
-const resources = {
-  officer: 20,
-  dog: 15,
-  car: 10,
-  helicopter: 5,
-};
+// const resources = {
+//   officer: 20,
+//   dog: 15,
+//   car: 10,
+//   helicopter: 5,
+// };
 const writeToLocalStorage = (key, value) => {
   // convert value to string
   const stringifiedValue = JSON.stringify(value);
@@ -31,7 +31,7 @@ const onSubmit = () => {
   writeToLocalStorage("username", value);
   if (readFromLocalStorage("username")) {
     $("#enter-username").remove();
-    writeToLocalStorage("resources", resources);
+    window.location.href = "./game.html";
   } else {
     $("#enter-username").text("please enter username to continue");
   }
