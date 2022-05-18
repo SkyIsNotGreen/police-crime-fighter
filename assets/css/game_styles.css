@@ -96,3 +96,7 @@ main {
     padding: 20px;
     line-height: 20px;
 }
+
+.error {
+    color: var(--red);
+}
