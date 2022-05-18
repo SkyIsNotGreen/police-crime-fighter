@@ -207,6 +207,7 @@ const displayModal = (modal, marker, clickedIndex) => {
   $("#modal-crime").text(typeOfCrime);
   $("#modal-reward").text(`£${solveTimes.reward}`);
   $("#choice-footer").empty();
+  $("#insufficient-resources-error").remove();
   addModalButtons(solveTimes);
   modal.show();
   resourceListener(modal, marker, typeOfCrime, solveTimes);
@@ -222,15 +223,12 @@ const resourceListener = (modal, marker, typeOfCrime, solveTimes) => {
       solveTimes.reward,
       marker
     );
-    closeModal();
   });
   $("#choice-dog").click(() => {
     resourceSelected("dog", solveTimes.dogSolveTime, solveTimes.reward, marker);
-    closeModal();
   });
   $("#choice-car").click(() => {
     resourceSelected("car", solveTimes.carSolveTime, solveTimes.reward, marker);
-    closeModal();
   });
   $("#choice-helicopter").click(() => {
     resourceSelected(
@@ -239,7 +237,6 @@ const resourceListener = (modal, marker, typeOfCrime, solveTimes) => {
       solveTimes.reward,
       marker
     );
-    closeModal();
   });
   $("#choice-cancel").click(() => {
     closeModal();
@@ -247,16 +244,25 @@ const resourceListener = (modal, marker, typeOfCrime, solveTimes) => {
 };
 
 const resourceSelected = (type, timeRemaining, reward, marker) => {
-  removeResource(type);
-  setTimeout(crimeSolved, timeRemaining, reward, marker, type);
+  if (removeResource(type)) {
+    setTimeout(crimeSolved, timeRemaining, reward, marker, type);
+    closeModal();
+  }
+
   // setInterval(crimeClock, 1000, timeRemaining, marker);
 };
 
 const removeResource = (type) => {
   const remainingResources = readFromLocalStorage("resources", {});
-  remainingResources[type]--;
-  refreshCounters(remainingResources);
-  writeToLocalStorage("resources", remainingResources);
+  if (isSufficientResources(remainingResources[type])) {
+    remainingResources[type]--;
+    refreshCounters(remainingResources);
+    writeToLocalStorage("resources", remainingResources);
+    return true;
+  } else {
+    insufficientResources();
+    return false;
+  }
 };
 
 const addResource = (type) => {
@@ -264,6 +270,19 @@ const addResource = (type) => {
   remainingResources[type]++;
   refreshCounters(remainingResources);
   writeToLocalStorage("resources", remainingResources);
+};
+
+const isSufficientResources = (amount) => {
+  return amount-- > 0 ? true : false;
+};
+
+const insufficientResources = () => {
+  $("#insufficient-resources-error").remove();
+  $("#modal-body").append(
+    `<p id="insufficient-resources-error" class="error">
+      Error: Insufficient Resources
+    </p>`
+  );
 };
 
 const crimeSolved = (reward, marker, type) => {
@@ -288,7 +307,7 @@ const resetResources = () => {
     officer: 20,
     dog: 15,
     car: 10,
-    helicopter: 5,
+    helicopter: 2,
   };
   refreshCounters(initialResources);
   writeToLocalStorage("resources", initialResources);
