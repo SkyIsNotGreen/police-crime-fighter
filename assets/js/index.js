@@ -23,7 +23,7 @@ const clickToStart1 = `<a
                 </a>`;
 
 const clickToStart2 = ` <a
-                  href="./game.html"
+                  href="./user-input.html"
                   id="button"
                   class="button is-medium is-responsive is-link is-outlined"
                 >
