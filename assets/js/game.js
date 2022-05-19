@@ -2,7 +2,7 @@
 
 const MAP_API_KEY = "AIzaSyAOCM-c2ZcfA_BS9BZSCd8a-fbiL9hz7a8";
 let crimeData = [];
-let resources = {
+let stats = {
   score: 0,
   money: 0,
   time: 0,
@@ -118,12 +118,6 @@ const resetInfo = () => {
   $("#score").text(0);
 };
 
-const getRemainingResources = () => {
-  console.log("Getting resources");
-  const remainingResources = readFromLocalStorage("resources", {});
-  console.log(remainingResources);
-};
-
 const generateInfoWindow = (marker) => {
   const infoWindow = new google.maps.InfoWindow({
     content: "Crime: " + crimeData[crimeIndex].type,
@@ -145,14 +139,11 @@ const generateInfoWindow = (marker) => {
 };
 
 const resetResources = () => {
-  const getUserName = localStorage.getItem("username");
   const initialResources = {
     officer: 20,
     dog: 15,
     car: 10,
     helicopter: 2,
-    user: getUserName,
-    crimesSolved: 0,
   };
   refreshCounters(initialResources);
   writeToLocalStorage("resources", initialResources);
@@ -161,7 +152,6 @@ const resetResources = () => {
 // begin displaying crimes
 
 const getMarkers = (map) => {
-  console.log(crimeData[crimeIndex].position);
   const marker = new google.maps.Marker({
     position: crimeData[crimeIndex].position,
     map: map,
@@ -264,7 +254,6 @@ const resourceListener = (modal, marker, typeOfCrime, solveTimes, map) => {
 
 const resourceSelected = (type, timeRemaining, reward, marker, map) => {
   if (removeResource(type)) {
-    console.log(marker);
     // createSolvingMarker(marker, map);
     resourceTimer = setTimeout(
       crimeSolved,
@@ -323,7 +312,6 @@ const insufficientResources = () => {
 };
 
 const createSolvingMarker = (marker, map) => {
-  console.log("Here");
   new google.maps.Marker({
     position: marker.position,
     map: map,
@@ -336,16 +324,11 @@ const createSolvingMarker = (marker, map) => {
 
 const crimeSolved = (reward, marker, type) => {
   // marker.setMap(null);
-  resources.money += reward;
+  stats.money += reward;
   solvedCrimes++;
   updateInfo();
   addResource(type);
   clearTimeout(resourceTimer);
-};
-
-const crimeClock = (timeRemaining, marker) => {
-  // display countdown until crime is solved
-  console.log(marker.label);
 };
 
 const updateCrimeMeter = () => {
@@ -359,20 +342,40 @@ const updateCrimeMeter = () => {
 };
 
 const updateInfo = () => {
-  $("#money").text(resources.money);
-  $("#score").text(resources.score);
+  $("#money").text(stats.money);
+  $("#crimes-solved").text(solvedCrimes);
 };
 
 const gameOver = () => {
   // stop all timers
-
-  // get time value & money & set to local storage
-
-  // display something to tell user the game has stopped and give option to move to highscores page
-
-  console.log("Game Over");
   clearInterval(markerTimer);
   clearInterval(gameTimer);
+  const getUserName = localStorage.getItem("username");
+  // get time value & money & set to local storage
+  const gameStats = {
+    money: stats.money,
+    time: stats.time,
+    crimesSolved: solvedCrimes,
+    userName: getUserName,
+  };
+  writeToLocalStorage("gameStats", gameStats);
+
+  // display something to tell user the game has stopped and give option to move to highscores page
+  $("#final-money").append(
+    `<i class="fa-solid fa-sack-dollar"> £${gameStats.money}</i>`
+  );
+  $("#final-time").append(
+    `<i class="fa-solid fa-clock"> ${gameStats.time}</i>`
+  );
+  $("#final-crimes-solved").append(
+    `<i class="fa-solid fa-handcuffs"> ${gameStats.crimesSolved}</i>`
+  );
+  $("#scores-page").click(function () {
+    window.location.href = "../../scores.html";
+  });
+  $("#modal-game-over").show();
+
+  console.log("Game Over");
 };
 
 // local storage
@@ -410,8 +413,8 @@ const refreshCounters = (resources) => {
 
 const startTimer = () => {
   gameTimer = setInterval(() => {
-    resources.time++;
-    $("#time").text(resources.time);
+    stats.time++;
+    $("#time").text(stats.time);
   }, 1000);
 };
 
