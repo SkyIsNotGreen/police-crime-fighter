@@ -355,12 +355,24 @@ const gameOver = () => {
   const gameStats = {
     money: stats.money,
     time: stats.time,
-    crimesSolver: solvedCrimes,
+    crimesSolved: solvedCrimes,
     userName: getUserName,
   };
   writeToLocalStorage("gameStats", gameStats);
 
   // display something to tell user the game has stopped and give option to move to highscores page
+  $("#final-money").append(
+    `<i class="fa-solid fa-sack-dollar"> £${gameStats.money}</i>`
+  );
+  $("#final-time").append(
+    `<i class="fa-solid fa-clock"> ${gameStats.time}</i>`
+  );
+  $("#final-crimes-solved").append(
+    `<i class="fa-solid fa-handcuffs"> ${gameStats.crimesSolved}</i>`
+  );
+  $("#scores-page").click(function () {
+    window.location.href = "../../scores.html";
+  });
   $("#modal-game-over").show();
 
   console.log("Game Over");
