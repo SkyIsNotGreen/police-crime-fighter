@@ -351,6 +351,8 @@ const gameOver = () => {
   clearInterval(markerTimer);
   clearInterval(gameTimer);
   const getUserName = localStorage.getItem("username");
+  const pastUserHistory = readFromLocalStorage("pastUserHistory", []);
+  console.log(pastUserHistory);
   // get time value & money & set to local storage
   const gameStats = {
     money: stats.money,
@@ -358,7 +360,10 @@ const gameOver = () => {
     crimesSolved: solvedCrimes,
     userName: getUserName,
   };
+  pastUserHistory.push(gameStats);
+  console.log(pastUserHistory);
   writeToLocalStorage("gameStats", gameStats);
+  writeToLocalStorage("pastUserHistory", pastUserHistory);
 
   // display something to tell user the game has stopped and give option to move to highscores page
   $("#final-money").append(
