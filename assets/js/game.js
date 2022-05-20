@@ -335,7 +335,7 @@ const updateCrimeMeter = () => {
   totalCrimes++;
   const crimeValue = totalCrimes - solvedCrimes;
   $("#crime-level").val(crimeValue);
-  if (crimeValue >= 25) {
+  if (crimeValue >= 2) {
     gameOver();
   }
   return totalCrimes;
@@ -350,9 +350,8 @@ const gameOver = () => {
   // stop all timers
   clearInterval(markerTimer);
   clearInterval(gameTimer);
-  const getUserName = localStorage.getItem("username");
+  const getUserName = readFromLocalStorage("username", "");
   const pastUserHistory = readFromLocalStorage("pastUserHistory", []);
-  console.log(pastUserHistory);
   // get time value & money & set to local storage
   const gameStats = {
     money: stats.money,
@@ -361,7 +360,6 @@ const gameOver = () => {
     userName: getUserName,
   };
   pastUserHistory.push(gameStats);
-  console.log(pastUserHistory);
   writeToLocalStorage("gameStats", gameStats);
   writeToLocalStorage("pastUserHistory", pastUserHistory);
 

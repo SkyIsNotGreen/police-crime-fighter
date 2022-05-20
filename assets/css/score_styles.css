@@ -3,7 +3,7 @@
   --midnight-blue: #01004eff;
   --duke-blue: #0100a4ff;
   --blue: #0000feff;
-  --medium-slate-blue: #7d7dffff;
+  --medium-slate-blue: rgb(107, 107, 220);
   --white: #fdfdffff;
   --light-coral: #ff8182ff;
   --red: #ff0101ff;
@@ -115,4 +115,14 @@
   font-size: large;
   color: white;
   margin-bottom: 0.4rem;
+}
+.userNameOnTable {
+  color: var(--medium-slate-blue);
+  font-family: "Avenir Next", sans-serif;
+  font-weight: 900;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  display: inline-block;
 }
