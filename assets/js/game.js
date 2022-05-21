@@ -335,7 +335,7 @@ const updateCrimeMeter = () => {
   totalCrimes++;
   const crimeValue = totalCrimes - solvedCrimes;
   $("#crime-level").val(crimeValue);
-  if (crimeValue >= 2) {
+  if (crimeValue >= 25) {
     gameOver();
   }
   return totalCrimes;
