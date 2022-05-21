@@ -46,14 +46,20 @@ body {
   height: auto;
   width: auto;
 }
-.game-title {
-  position: relative;
+
+.game-title::before {
+  content: "|";
+  animation: blink 0.7s infinite;
+
+  /* position: relative;
   width: 26rem;
   border-right: 0.15em solid var(--red);
   white-space: nowrap;
   margin: 0 auto;
   letter-spacing: 0.15em;
-  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite; */
+}
+.game-title:after {
 }
 
 /* The typing effect */
@@ -67,18 +73,22 @@ body {
 }
 
 /* The typewriter cursor effect */
-@keyframes blink-caret {
+@keyframes blink {
   from,
-  to {
-    border-color: transparent;
+  0% {
+    opacity: 1;
   }
-  50% {
-    border-color: var(--light-coral);
+  100% {
+    opacity: 0;
   }
 }
 .game-title,
 .info-title {
   text-align: center;
+}
+
+.button-div:hover {
+  transform: scale(1.5);
 }
 
 .button-div {

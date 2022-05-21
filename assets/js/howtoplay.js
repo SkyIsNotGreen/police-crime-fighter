@@ -66,8 +66,13 @@ const checkboxChecked = () => {
     return writeToLocalStorage("", "");
   }
 };
+const whenDeleted = () => {
+  console.log("working");
+  window.location.href = "./user-input.html";
+};
 $("#next").click(showNext);
 $("#previous").click(showPrevious);
+$(".delete").click(whenDeleted);
 $("input").click(checkboxChecked);
 
 const startHowToPlay = () => {
