@@ -162,6 +162,7 @@ h1 {
 /* promotional videos  */
 .promo-video {
   margin: 10px;
+  width: 300;
   display: flex;
   flex-direction: row;
   justify-content: center;
