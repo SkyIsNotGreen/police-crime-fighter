@@ -37,12 +37,6 @@ if (readFromLocalStorage("keys")) {
   $(".button-div").append(clickToStart1);
 }
 
-const handleTypewriter = () => {
-  const title = $("#game-title").html.split("");
-  $("#game-title").html = "";
-  title.forEach(() => $("#game-title").html);
-};
 $(document).ready(() => {
   handleNavBarToggle();
-  handleTypewriter();
 });
