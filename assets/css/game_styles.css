@@ -17,6 +17,7 @@
 main {
   height: 100vh;
   background-image: linear-gradient(to right, var(--blue), var(--red));
+  overflow: hidden;
   /* filter: blur(50px); */
 }
 
@@ -26,7 +27,6 @@ main {
   display: flex;
   justify-content: center;
   position: relative;
-  height: 100 vh;
 }
 
 #map {
@@ -120,4 +120,47 @@ main {
   margin: 1rem;
   padding: 0.4rem;
   font-size: 0.8rem;
+}
+
+@media screen and (max-device-width: 596px) and (orientation: portrait) {
+  .map-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 100vh;
+  }
+
+  #map {
+    width: 100vw;
+    margin: 5px;
+  }
+  .resource-container {
+    position: absolute;
+    display: flex;
+    width: 98vw;
+
+    flex-direction: row;
+    justify-content: center;
+    bottom: 10rem;
+  }
+
+  .resource-counter-car,
+  .resource-counter-dog,
+  .resource-counter-heli,
+  .resource-counter-officer {
+    padding: 0;
+  }
+
+  .resource {
+    width: 50px;
+    height: 70px;
+
+    background-color: var(--light-coral);
+    border-radius: 100%;
+  }
+
+  .crime-level-container {
+    position: absolute;
+    bottom: 7rem;
+  }
 }

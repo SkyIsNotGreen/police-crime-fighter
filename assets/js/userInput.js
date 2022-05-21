@@ -33,7 +33,9 @@ const onSubmit = () => {
     $("#enter-username").remove();
     window.location.href = "./game.html";
   } else {
-    $("#enter-username").text("please enter username to continue");
+    $("#enter-username").text(
+      " * MANDATORY: Please enter a valid username to continue."
+    );
   }
 };
 // target button

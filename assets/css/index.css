@@ -11,13 +11,17 @@
 }
 html,
 body {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   margin: 0px;
   padding: 0px;
 }
 /* banner */
 .banner {
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow-wrap: normal;
   background-color: var(--duke-blue);
   background-image: url("../images/crime-banner-photo.jpeg");
   background-repeat: no-repeat;
@@ -28,6 +32,9 @@ body {
   background-blend-mode: hard-light;
 }
 .black-bg {
+  width: 100vw;
+  margin: 0;
+  padding: 0;
   background-color: rgba(52, 52, 52, 0.4);
   border-radius: 1rem;
 }
@@ -35,14 +42,13 @@ body {
 .title-div {
   position: relative;
   display: block;
-
+  overflow-wrap: normal;
   height: auto;
   width: auto;
 }
 .game-title {
   position: relative;
   width: 26rem;
-  overflow: hidden;
   border-right: 0.15em solid var(--red);
   white-space: nowrap;
   margin: 0 auto;
@@ -216,7 +222,50 @@ div.speech-bubble-1:first-child {
   padding: 0rem;
 }
 
+/* user input styles */
+.game-start-container {
+  display: flex;
+  flex-direction: column;
+}
+.input-container {
+  background-image: url("../images/police-bg.jpeg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-color: var(--duke-blue);
+  background-blend-mode: overlay;
+  display: flex;
+  flex-grow: 2;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.user-input,
+.name-input {
+  width: 50vw;
+}
+.label-input-game {
+  text-align: center;
+  font-family: "Press Start 2P", cursive;
+  color: white;
+}
+
+.game-start-btn {
+  background-color: var(--midnight-blue);
+  color: white;
+}
 @media screen and (max-device-width: 596px) and (orientation: portrait) {
+  :root {
+    font-size: 12px;
+  }
+  /* body {
+    overflow: hidden;
+  } */
+
+  .game-title {
+    font-size: 1.6rem;
+  }
   .features {
     display: flex;
     flex-direction: column;
