@@ -24,151 +24,172 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
     <title>Scores | Police Crime Finder</title>
     <link rel="stylesheet" href="./assets/css/score_styles.css" />
   </head>
   <body>
-  <main>
-
-    <!-- Responsive navbar using bulma/jQuery -->
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="./index.html">
-          <i class="fa-solid fa-house"></i>
-        </a>
-        <a
-          role="button"
-          class="navbar-burger"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navbarBasicExample"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item" href="./user-input.html"> Game </a>
-
-          <a class="navbar-item" href="./scores.html"> Scores </a>
-
-          <a class="navbar-item" href="./contacts.html"> Contacts </a>
+    <main id="main">
+      <!-- Responsive navbar using bulma/jQuery -->
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="./index.html">
+            <i class="fa-solid fa-house"></i>
+          </a>
+          <a
+            role="button"
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
-      </div>
-    </nav>
 
-    <!-- banner section-->
-    <section class="hero is-medium bannerContainer leardrBoardColor">
-      <div class="bannerContainer">
-        <div class="hero-body">
-          <p class="title">
-            Leaderboard
-          </p>
-          <p class="subtitle">
-            Checkout your score now!
-          </p>
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" href="./user-input.html"> Game </a>
+
+            <a class="navbar-item" href="./scores.html"> Scores </a>
+
+            <a class="navbar-item" href="./contacts.html"> Contacts </a>
+          </div>
         </div>
-        <div class="PoliceContainer">
-          <!-- animation police goes here -->
-          <img src="./assets/images/police-man-placeholder.png" alt="police image" class="policeImage">
+      </nav>
+
+      <!-- banner section-->
+      <section class="hero is-medium bannerContainer leardrBoardColor">
+        <div class="bannerContainer">
+          <div class="hero-body">
+            <p class="title">Leaderboard</p>
+            <p class="subtitle">Checkout your score now!</p>
+          </div>
+          <div class="PoliceContainer animate__animated animate__flash">
+            <!-- animation police goes here -->
+            <img
+              src="./assets/images/police-man-placeholder.png"
+              alt="police image"
+              class="policeImage"
+            />
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- cards to render top three winner -->
-    <section class="winnerCardContainer">
-
-      <div class="silverCardContainer">
-        <p><strong class="text">John Smith</strong></p>
-        <div class="silverCardItem">
-          <img class="image" src="./assets/images/silverMadel.png">
-          <p class="text">Score: 50 <br> 2 / 13</p>  
+      <!-- cards to render top three winner -->
+      <!-- <section class="winnerCardContainer">
+        <div class="silverCardContainer">
+          <p><strong class="text" id="secondWinnerName">John Smith</strong></p>
+          <div class="silverCardItem">
+            <img class="image" src="./assets/images/silverMadel.png" />
+            <p class="text">
+              Score: 50 <br />
+              2 / 13
+            </p>
+            <p>
+              Time: 00:15 <br />
+              Crime Solved:1 <br />
+              Money:1
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div class="goldCardContainer">
-        <p><strong class="text">John Smith</strong></p>
-        <div class="goldCardItem">
-          <img class="image" src="./assets/images/goldMadel.png">
-          <p class="text">Score: 50 <br> 1 / 13</p> 
+        <div class="goldCardContainer">
+          <p><strong class="text" id="firstWinnerName">John Smith</strong></p>
+          <div class="goldCardItem">
+            <img class="image" src="./assets/images/goldMadel.png" />
+            <p class="text">
+              Score: 50 <br />
+              1 / 13
+            </p>
+            <p>
+              Time: 00:15 <br />
+              Crime Solved:1 <br />
+              Money:1
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div class="bronzeCardContainer">
-        <p><strong class="text">John Smith</strong></p>
-        <div class="bronzeCardItem">
-          <img class="image" src="./assets/images/bronzeMadel.png">
-          <p class="text">Score: 50 <br> 3 / 13</p>  
+        <div class="bronzeCardContainer">
+          <p><strong class="text" id="thirdWinnerName">John Smith</strong></p>
+          <div class="bronzeCardItem">
+            <img class="image" src="./assets/images/bronzeMadel.png" />
+            <p class="text">
+              Score: 50 <br />
+              3 / 13
+            </p>
+            <p>
+              Time: 00:15 <br />
+              Crime Solved:1 <br />
+              Money:1
+            </p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section> -->
 
-    <!-- table to render users scores -->
-    <section class="tableContainer">
-    <table class="table is-fullwidth">
-      <tbody>
-        <thead>
-          <tr>
-            <th><abbr title="Position">Rank</abbr></th>
-            <th>User Name</th>
-            <th><abbr title="Played">Money</abbr></th>
-            <th><abbr title="Won">Score</abbr></th>
-          </tr>
-        </thead>
-            <!-- username can link to the user profile if applicable -->
+      <!-- table to render users scores -->
+      <!-- <section class="tableContainer">
+        <table class="table is-fullwidth">
+          <tbody>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>User Name</th>
+                <th>Time Used</th>
+                <th>Crime Solved</th>
+                <th>Money</th>
+                <th>Total Score</th>
+              </tr>
+            </thead>
+          </tbody>
+        </table>
+      </section>
+      <article class="message is-warning">
+        <div class="message-body">
+          Oops, you do not have any score...
+          <strong>Pellentesque risus mi</strong>
+          <a>felis venenatis</a>
+        </div>
+      </article> -->
+
+      <!-- username can link to the user profile if applicable -->
+
+      <!-- <tbody>
         <tr>
           <th>4</th>
           <td>
             <i class="fa-solid fa-user"></i>
-            <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">user1</a>
-          </td >
-          <td>38</td>
-          <td>23</td>
-          
-        <tr>
-          <th>5</th>
-          <td>
-            <i class="fa-solid fa-user"></i>
-            <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">user1</a>
+            <a
+              href="https://en.wikipedia.org/wiki/Leicester_City_F.C."
+              title="Leicester City F.C."
+              >user1</a
+            >
           </td>
           <td>38</td>
           <td>23</td>
-
-        <tr>
-          <th>6</th>
-          <td>
-            <i class="fa-solid fa-user"></i>
-            <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">user1</a>
-          </td>
-          <td>38</td>
           <td>23</td>
-
-        <tr>
-          <th>7</th>
-          <td>
-            <i class="fa-solid fa-user"></i>
-            <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">user1</a>
-          </td>
-          <td>38</td>
           <td>23</td>
-    </section>
-  </main>
-  <script
+        </tr>
+      </tbody> -->
+    </main>
+    <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
       integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
-  ></script>
-  <script
+    ></script>
+    <script
       src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
       integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
-  ></script>
-  <script src="./assets/js/navbar.js"></script>
-  <script src="./assets/js/scores.js"></script>
+    ></script>
+    <script src="./assets/js/navbar.js"></script>
+    <script src="./assets/js/scores.js"></script>
   </body>
 </html>
