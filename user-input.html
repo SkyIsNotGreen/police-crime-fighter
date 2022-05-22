@@ -17,6 +17,12 @@
       href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Josefin+Sans:wght@400;500;700&family=Lato:wght@100;400;700&family=Poppins:wght@300;400;700&family=Roboto+Condensed:wght@300;400;700&family=Roboto:wght@400;500;700&family=Smokum&family=Source+Sans+Pro:wght@300;400;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -27,7 +33,7 @@
     <title>User input | Police Crime Finder</title>
     <link rel="stylesheet" href="./assets/css/index.css" />
   </head>
-  <body>
+  <body class="game-start-container">
     <!-- Responsive navbar using bulma/jQuery -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
@@ -58,21 +64,21 @@
         </div>
       </div>
     </nav>
-    <main>
-      <div class="field">
-        <label class="label">Name</label>
+    <main class="input-container">
+      <div class="field name-input">
+        <label class="label label-input-game"> Name</label>
         <div class="control">
-          <input class="input" type="text" placeholder="Text input" />
+          <input class="input" type="text" placeholder="Type name in here" />
         </div>
       </div>
 
-      <div class="field">
-        <label class="label">Username</label>
+      <div class="field user-input">
+        <label class="label label-input-game"> Username</label>
         <div class="control has-icons-left has-icons-right">
           <input
-            class="input is-danger"
+            class="input"
             type="text"
-            placeholder="Text input"
+            placeholder="Type a username in here "
             id="input"
           />
           <span class="icon is-small is-left">
@@ -86,7 +92,7 @@
       </div>
 
       <!-- <div class="field">
-        <label class="label">Subject</label>
+        <label class="label label-input-game">Subject</label>
         <div class="control">
           <div class="select">
             <select>
@@ -99,7 +105,9 @@
 
       <div class="field is-grouped">
         <div class="control">
-          <button class="button is-link" id="submit">Begin</button>
+          <button class="button game-start-btn" id="submit">
+            <i class="fa-solid fa-circle-play"> Start </i>
+          </button>
         </div>
       </div>
     </main>

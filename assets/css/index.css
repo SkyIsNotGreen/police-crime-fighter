@@ -11,13 +11,17 @@
 }
 html,
 body {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   margin: 0px;
   padding: 0px;
 }
 /* banner */
 .banner {
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow-wrap: normal;
   background-color: var(--duke-blue);
   background-image: url("../images/crime-banner-photo.jpeg");
   background-repeat: no-repeat;
@@ -28,6 +32,9 @@ body {
   background-blend-mode: hard-light;
 }
 .black-bg {
+  width: 100vw;
+  margin: 0;
+  padding: 0;
   background-color: rgba(52, 52, 52, 0.4);
   border-radius: 1rem;
 }
@@ -35,28 +42,30 @@ body {
 .title-div {
   position: relative;
   display: block;
-
+  overflow-wrap: normal;
   height: auto;
   width: auto;
 }
+
 .game-title {
   position: relative;
-  width: 26rem;
+  width: max-content;
   overflow: hidden;
   border-right: 0.15em solid var(--red);
   white-space: nowrap;
+  font-family: "Courier New", Courier, monospace;
   margin: 0 auto;
   letter-spacing: 0.15em;
-  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  animation: typing 3s steps(20, end), blink-caret 0.75s step-end infinite;
 }
 
 /* The typing effect */
 @keyframes typing {
   from {
-    width: 0;
+    width: 0%;
   }
   to {
-    width: 100%;
+    width: 30rem;
   }
 }
 
@@ -70,6 +79,42 @@ body {
     border-color: var(--light-coral);
   }
 }
+
+/* #game-title::before,
+#game-title::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  font-family: monospace;
+}
+#game-title::before {
+  background-color: var(--light-coral);
+  animation: typewriter 4s steps(20) forwards;
+} */
+
+/* .game-title::before {
+  content: "|";
+  animation: blink 0.7s infinite;} */
+
+/* @keyframes typewriter {
+  to {
+    left: 100%;
+  } }*/
+
+/* @keyframes blink {
+  from,
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }} */
+
 .game-title,
 .info-title {
   text-align: center;
@@ -117,6 +162,7 @@ h1 {
 /* promotional videos  */
 .promo-video {
   margin: 10px;
+  width: 300;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -149,13 +195,23 @@ li {
 }
 /* map section */
 .map-div {
-  margin: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .map-div img {
-  width: 100%;
-  height: 100%;
+  box-shadow: 0 0 0.5rem rgba(194, 10, 10, 0.5);
+  margin: 10px;
+  padding: 10px;
+  width: 95%;
   object-fit: contain;
+  border-left: 5px solid var(--duke-blue);
+  border-top: 5px solid var(--red);
+  border-bottom: 5px solid var(--international-orange-engineering);
+  border-right: 5px solid var(--midnight-blue);
+  border-radius: 5rem;
 }
 
 .hr {
@@ -216,7 +272,63 @@ div.speech-bubble-1:first-child {
   padding: 0rem;
 }
 
+/* user input styles */
+.game-start-container {
+  display: flex;
+  flex-direction: column;
+}
+.input-container {
+  background-image: url("../images/police-bg.jpeg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-color: var(--duke-blue);
+  background-blend-mode: overlay;
+  display: flex;
+  flex-grow: 2;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.user-input,
+.name-input {
+  width: 50vw;
+}
+.label-input-game {
+  text-align: center;
+  font-family: "Press Start 2P", cursive;
+  color: white;
+}
+
+.game-start-btn {
+  background-color: var(--midnight-blue);
+  color: white;
+}
 @media screen and (max-device-width: 596px) and (orientation: portrait) {
+  :root {
+    font-size: 12px;
+  }
+  @keyframes typing {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 25rem;
+    }
+  }
+  .cards {
+    width: 20vw;
+    margin: 0.5rem;
+    box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.5);
+    border-radius: 1.7rem;
+    background-color: var(--medium-slate-blue);
+    color: white;
+  }
+
+  .game-title {
+    font-size: 1.6rem;
+  }
   .features {
     display: flex;
     flex-direction: column;

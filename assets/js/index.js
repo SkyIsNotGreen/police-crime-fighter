@@ -1,4 +1,5 @@
 console.log("hello from index");
+const title = "Police Crime Fighter";
 
 const readFromLocalStorage = (key, defaultValue) => {
   // get from LS using key name

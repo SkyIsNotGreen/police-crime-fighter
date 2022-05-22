@@ -60,19 +60,21 @@
     </nav>
     <main>
       <!-- create a banner with buttons -->
-      <section class="hero is-danger is-fullheight">
+      <section class="hero is-danger is-fullheight hero">
         <div class="hero-body banner">
           <div class="">
-            <div class="black-bg is-half">
+            <div class="black-bg is-half type-container">
               <div class="is-half is-offset-one-quarter title-div">
-                <p class="title game-title">Police Crime Fighter</p>
+                <p class="title game-title" id="game-title">
+                  Police Crime Fighter
+                </p>
               </div>
               <p class="subtitle info-title">
                 If you ever feel that there is a lot of injustice in this world
-                and nothing is done about it, then this is the game! Solve as
-                many crimes as you can using your provided police resources. All
-                the offences in the game are sourced from actual crimes in
-                Birmingham.
+                and nothing is done about it, then this is the game for you!
+                Solve as many crimes as you can using your provided police
+                resources. All the offences in the game are sourced from actual
+                crimes in Birmingham.
               </p>
               <div class="button-div">
                 <!-- <a
@@ -139,7 +141,7 @@
           </div>
           <div class="card-content">
             <div class="content fit-contain">
-              Level: 'Professional'
+              Level: 'Pro'
               <em>Police-dog and team can cover a large group of tasks</em>
               <br />
             </div>
@@ -172,9 +174,9 @@
         <div class="columns vid">
           <div class="column is-two-thirds promo-video">
             <video
-              src="./assets/images/game-video.mp4"
-              width="400"
-              height="350"
+              src="./assets/images/demo-video.mp4"
+              width="800"
+              height="700"
               onclick="this.play()"
               muted
             ></video>
@@ -233,6 +235,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
     <script src="./assets/js/navbar.js"></script>
     <script src="./assets/js/index.js"></script>
   </body>

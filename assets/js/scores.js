@@ -26,8 +26,11 @@ gameStat.sort((a, b) => {
 const displayTime = (time) => {
   const minutes = Math.floor(time / 60);
   const seconds = time - minutes * 60;
+  let newSeconds;
   if (seconds < 10) {
     newSeconds = `0${seconds}`;
+  } else {
+    newSeconds = seconds;
   }
   return `0${minutes} : ${newSeconds}`;
 };
