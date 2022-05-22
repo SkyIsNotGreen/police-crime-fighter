@@ -47,9 +47,20 @@ const renderSpeechAlerts = () => {
   const speechToDisplay = speech[speechIndex].text;
   speechText.text(speechToDisplay);
 };
+const renderGame = () => {
+  const button = `<a href= "./user-input.html" class="button game-start-btn" id="submit">
+            <i class="fa-solid fa-circle-play"> Start </i>
+          </a>`;
+  $(".container-nav").append(button);
+};
 const showNext = () => {
   console.log(speechIndex);
   speechIndex = speechIndex === 2 ? 0 : speechIndex + 1;
+  if (speechIndex === 2) {
+    renderGame();
+    next.remove();
+    previous.remove();
+  }
 
   renderSpeechAlerts();
 };
@@ -70,8 +81,8 @@ const whenDeleted = () => {
   console.log("working");
   window.location.href = "./user-input.html";
 };
-$("#next").click(showNext);
-$("#previous").click(showPrevious);
+const next = $("#next").click(showNext);
+const previous = $("#previous").click(showPrevious);
 $(".delete").click(whenDeleted);
 $("input").click(checkboxChecked);
 
