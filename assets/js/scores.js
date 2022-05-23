@@ -18,9 +18,11 @@ const writeToLocalStorage = (key, value) => {
 };
 
 const gameStat = readFromLocalStorage("pastUserHistory");
-gameStat.sort((a, b) => {
-  return b.money - a.money;
-});
+if (gameStat) {
+  gameStat.sort((a, b) => {
+    return b.time - a.time;
+  });
+}
 
 // convert time format
 const displayTime = (time) => {
@@ -34,8 +36,6 @@ const displayTime = (time) => {
   }
   return `0${minutes} : ${newSeconds}`;
 };
-
-// write a funciton to calculate total score
 
 // for each function to render ranking table
 const renderRankingSection = () => {
@@ -103,7 +103,6 @@ const renderWinnerBoard = () => {
     <div class="goldCardItem">
       <img class="image" src="./assets/images/goldMadel.png" />
       <p class="text">
-        Score: 50 <br />
         1 / ${gameStat.length}
       </p>
       <p>
@@ -140,7 +139,6 @@ const renderWinnerBoard = () => {
     <div class="silverCardItem">
       <img class="image" src="./assets/images/silverMadel.png" />
       <p class="text">
-        Score: 50 <br />
         2  / ${gameStat.length}
       </p>
       <p>
@@ -158,7 +156,6 @@ const renderWinnerBoard = () => {
     <div class="goldCardItem">
       <img class="image" src="./assets/images/goldMadel.png" />
       <p class="text">
-        Score: 50 <br />
         1/ ${gameStat.length}
       </p>
       <p>
@@ -195,7 +192,6 @@ const renderWinnerBoard = () => {
     <div class="silverCardItem">
       <img class="image" src="./assets/images/silverMadel.png" />
       <p class="text">
-        Score: 50 <br />
         2  / ${gameStat.length}
       </p>
       <p>
@@ -213,7 +209,6 @@ const renderWinnerBoard = () => {
     <div class="goldCardItem">
       <img class="image" src="./assets/images/goldMadel.png" />
       <p class="text">
-        Score: 50 <br />
         1 / ${gameStat.length}
       </p>
       <p>
@@ -230,7 +225,6 @@ const renderWinnerBoard = () => {
   <div class="bronzeCardItem">
     <img class="image" src="./assets/images/bronzeMadel.png" />
     <p class="text">
-      Score: 50 <br />
       3 / ${gameStat.length}
     </p>
     <p>
@@ -267,7 +261,6 @@ const renderWinnerBoard = () => {
     <div class="silverCardItem">
       <img class="image" src="./assets/images/silverMadel.png" />
       <p class="text">
-        Score: 50 <br />
         2  / ${gameStat.length}
       </p>
       <p>
@@ -285,7 +278,6 @@ const renderWinnerBoard = () => {
     <div class="goldCardItem">
       <img class="image" src="./assets/images/goldMadel.png" />
       <p class="text">
-        Score: 50 <br />
         1 / ${gameStat.length}
       </p>
       <p>
@@ -302,7 +294,6 @@ const renderWinnerBoard = () => {
   <div class="bronzeCardItem">
     <img class="image" src="./assets/images/bronzeMadel.png" />
     <p class="text">
-      Score: 50 <br />
       3 / ${gameStat.length}
     </p>
     <p>
