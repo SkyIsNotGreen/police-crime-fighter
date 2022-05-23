@@ -24,23 +24,8 @@
 .PoliceContainer {
   width: 30%;
   height: 100%;
-  /* transition: transform 1s cubic-bezier(0.075, 0.82, 0.165, 1) 3s; */
-}
-.bannerContainer.PoliceContainer {
-  animation: topDown 1s ease-in;
 }
 
-@keyframes topDown {
-  0% {
-    transform: translateX(0);
-  }
-  33% {
-    transform: translateX();
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
 .policeImage {
   width: 100%;
   height: 100%;
