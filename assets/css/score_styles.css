@@ -13,6 +13,14 @@
 }
 
 /* banner section */
+.title {
+  color: white;
+  font-size: 50px;
+}
+.subtitle {
+  color: white;
+  font-size: 25px;
+}
 .leardrBoardColor {
   background-color: var(--medium-slate-blue);
 }
