@@ -92,8 +92,6 @@ main {
 }
 
 .choice-btn {
-  padding: 20px;
-  line-height: 20px;
 }
 
 .error {
@@ -158,7 +156,19 @@ main {
     background-color: var(--light-coral);
     border-radius: 100%;
   }
+  .modal-responsive {
+    width: 25rem;
+  }
 
+  #choice-officer,
+  #choice-dog,
+  #choice-car,
+  #choice-helicopter,
+  #choice-cancel {
+    width: 15em;
+    font-size: 0.8rem;
+    padding: 0.5px;
+  }
   .crime-level-container {
     position: absolute;
     bottom: 7rem;
