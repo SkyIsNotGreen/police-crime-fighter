@@ -374,7 +374,7 @@ const gameOver = () => {
     `<i class="fa-solid fa-handcuffs"> ${gameStats.crimesSolved}</i>`
   );
   $("#scores-page").click(function () {
-    window.location.href = "../scores.html";
+    window.location.href = "./scores.html";
   });
   $("#modal-game-over").show();
 };
