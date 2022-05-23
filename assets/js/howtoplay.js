@@ -49,7 +49,7 @@ const renderSpeechAlerts = () => {
 };
 const renderGame = () => {
   const button = `<a href= "./user-input.html" class="button game-start-btn" id="submit">
-            <i class="fa-solid fa-circle-play"> Start </i>
+            <i class="fa-solid fa-circle-play"> Begin </i>
           </a>`;
   $(".container-nav").append(button);
 };
