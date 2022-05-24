@@ -20,7 +20,7 @@ const writeToLocalStorage = (key, value) => {
 const gameStat = readFromLocalStorage("pastUserHistory");
 if (gameStat) {
   gameStat.sort((a, b) => {
-    return b.time - a.time;
+    return b.money - a.money;
   });
 }
 
@@ -43,16 +43,15 @@ const renderRankingSection = () => {
   console.log("the data is:" + JSON.stringify(gameStat[3]));
 
   const renderRankingBoard = (element, index) => {
-    const tableInfo = `<tr>
-    <th>${index + 1}</th>
+    const tableInfo = `<tr class="tableRow">
+    <th class="tableText">${index + 1}</th>
     <td>
       <i class="fa-solid fa-user"></i>
       <p class="userNameOnTable">${element.userName}</p>
     </td>
-    <td>${displayTime(element.time)}</td>
-    <td>${element.crimesSolved}</td>
-    <td>${element.money}</td>
-    <td>50</td>
+    <td class="tableText">${displayTime(element.time)}</td>
+    <td class="tableText">${element.crimesSolved}</td>
+    <td class="tableText">${element.money}</td>
     `;
     $("#thead").append(tableInfo);
   };
@@ -74,7 +73,7 @@ const renderWinnerBoard = () => {
   <table class="table is-fullwidth">
     <tbody>
       <thead>
-        <tr>
+        <tr class="tableTitle">
           <th>Rank</th>
           <th>User Name</th>
           <th>Time Used</th>
@@ -105,10 +104,10 @@ const renderWinnerBoard = () => {
       <p class="text">
         1 / ${gameStat.length}
       </p>
-      <p>
+      <p class="subText">
+      <Strong class="money">Money : ${gameStat[0].money}</Strong><br />
         Time: ${displayTime(gameStat[0].time)} <br />
-        Crime Solved:${gameStat[0].crimesSolved} <br />
-        Money:${gameStat[0].money}
+        Crime Solved: ${gameStat[0].crimesSolved} 
       </p>
     </div>
   </div>
@@ -117,7 +116,7 @@ const renderWinnerBoard = () => {
 <table class="table is-fullwidth">
   <tbody>
     <thead>
-      <tr>
+      <tr class="tableTitle">
         <th>Rank</th>
         <th>User Name</th>
         <th>Time Used</th>
@@ -141,10 +140,10 @@ const renderWinnerBoard = () => {
       <p class="text">
         2  / ${gameStat.length}
       </p>
-      <p>
+      <p class="subText">
+        <Strong class="money">Money : ${gameStat[1].money}</Strong><br />
         Time: ${displayTime(gameStat[1].time)}<br />
-        Crime Solved:${gameStat[1].crimesSolved}<br />
-        Money:${gameStat[1].money}
+        Crime Solved: ${gameStat[1].crimesSolved}
       </p>
     </div>
   </div>
@@ -158,10 +157,10 @@ const renderWinnerBoard = () => {
       <p class="text">
         1/ ${gameStat.length}
       </p>
-      <p>
+      <p class="subText">
+      <Strong class="money">Money : ${gameStat[0].money}</Strong><br />
         Time: ${displayTime(gameStat[0].time)} <br />
-        Crime Solved:${gameStat[0].crimesSolved} <br />
-        Money:${gameStat[0].money}
+        Crime Solved: ${gameStat[0].crimesSolved} 
       </p>
     </div>
   </div>
@@ -170,7 +169,7 @@ const renderWinnerBoard = () => {
 <table class="table is-fullwidth">
   <tbody>
     <thead>
-      <tr>
+      <tr class="tableTitle">
         <th>Rank</th>
         <th>User Name</th>
         <th>Time Used</th>
@@ -194,10 +193,10 @@ const renderWinnerBoard = () => {
       <p class="text">
         2  / ${gameStat.length}
       </p>
-      <p>
+      <p class="subText">
+        <Strong class="money">Money : ${gameStat[1].money}</Strong><br />
         Time: ${displayTime(gameStat[1].time)}<br />
-        Crime Solved:${gameStat[1].crimesSolved}<br />
-        Money:${gameStat[1].money}
+        Crime Solved: ${gameStat[1].crimesSolved}
       </p>
     </div>
   </div>
@@ -211,10 +210,10 @@ const renderWinnerBoard = () => {
       <p class="text">
         1 / ${gameStat.length}
       </p>
-      <p>
+      <p class="subText">
+        <Strong class="money">Money : ${gameStat[0].money}</Strong><br />
         Time: ${displayTime(gameStat[0].time)} <br />
-        Crime Solved:${gameStat[0].crimesSolved} <br />
-        Money:${gameStat[0].money}
+        Crime Solved: ${gameStat[0].crimesSolved} 
       </p>
     </div>
   </div>
@@ -227,10 +226,10 @@ const renderWinnerBoard = () => {
     <p class="text">
       3 / ${gameStat.length}
     </p>
-    <p>
+    <p class="subText">
+      <Strong class="money">Money : ${gameStat[2].money}</Strong><br />
       Time: ${displayTime(gameStat[2].time)}  <br />
-      Crime Solved:${gameStat[2].crimesSolved}  <br />
-      Money:${gameStat[2].money}
+      Crime Solved: ${gameStat[2].crimesSolved}  
     </p>
   </div>
 </div>
@@ -239,7 +238,7 @@ const renderWinnerBoard = () => {
 <table class="table is-fullwidth">
   <tbody>
     <thead>
-      <tr>
+      <tr class="tableTitle">
         <th>Rank</th>
         <th>User Name</th>
         <th>Time Used</th>
@@ -263,10 +262,10 @@ const renderWinnerBoard = () => {
       <p class="text">
         2  / ${gameStat.length}
       </p>
-      <p>
+      <p class="subText">
+        <Strong class="money">Money : ${gameStat[1].money}</Strong><br />
         Time: ${displayTime(gameStat[1].time)}<br />
-        Crime Solved:${gameStat[1].crimesSolved}<br />
-        Money:${gameStat[1].money}
+        Crime Solved: ${gameStat[1].crimesSolved}
       </p>
     </div>
   </div>
@@ -280,10 +279,10 @@ const renderWinnerBoard = () => {
       <p class="text">
         1 / ${gameStat.length}
       </p>
-      <p>
+      <p class="subText">
+        <Strong class="money">Money : ${gameStat[0].money}</Strong><br />
         Time: ${displayTime(gameStat[0].time)} <br />
-        Crime Solved:${gameStat[0].crimesSolved} <br />
-        Money:${gameStat[0].money}
+        Crime Solved: ${gameStat[0].crimesSolved}
       </p>
     </div>
   </div>
@@ -296,10 +295,10 @@ const renderWinnerBoard = () => {
     <p class="text">
       3 / ${gameStat.length}
     </p>
-    <p>
+    <p class="subText">
+      <Strong class="money">Money : ${gameStat[2].money}</Strong><br />
       Time: ${displayTime(gameStat[2].time)}  <br />
-      Crime Solved:${gameStat[2].crimesSolved}  <br />
-      Money:${gameStat[2].money}
+      Crime Solved: ${gameStat[2].crimesSolved} 
     </p>
   </div>
 </div>
@@ -308,13 +307,12 @@ const renderWinnerBoard = () => {
 <table class="table is-fullwidth">
   <tbody>
     <thead id="thead">
-      <tr>
+      <tr class="tableTitle">
         <th>Rank</th>
         <th>User Name</th>
         <th>Time Used</th>
         <th>Crime Solved</th>
         <th>Money</th>
-        <th>Total Score</th>
       </tr>
     </thead>
   </tbody>
