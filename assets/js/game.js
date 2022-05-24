@@ -21,7 +21,6 @@ let resourceTimer;
 // get and display map from Google API
 
 const initMap = async () => {
-  // https://developers.google.com/maps/documentation/javascript/interaction
   const birminghamLocation = { lat: 52.474282, lng: -1.898623 };
 
   const mapElement = document.getElementById("map");
@@ -121,8 +120,6 @@ const resetInfo = () => {
 const generateInfoWindow = (marker) => {
   const infoWindow = new google.maps.InfoWindow({
     content: "Crime: " + crimeData[crimeIndex].type,
-    // "<br>" +
-    // "<p>Time Remaining: 4 seconds</p>",
   });
 
   marker.addListener("mouseover", () => {
@@ -266,15 +263,8 @@ const resourceSelected = (type, timeRemaining, reward, marker, map) => {
 
     closeModal();
 
-    // const newMarker = new google.maps.Marker({
-    //   position: marker.position,
-    //   map: map,
-    //   id: marker.id,
-    //   // label: "5",
-    // });
   }
 
-  // setInterval(crimeClock, 1000, timeRemaining, marker);
 };
 
 const removeResource = (type) => {
@@ -329,17 +319,23 @@ const crimeSolved = (reward, marker, type) => {
   updateInfo();
   addResource(type);
   clearTimeout(resourceTimer);
+  refreshCrimeMeter();
 };
 
 const updateCrimeMeter = () => {
   totalCrimes++;
-  const crimeValue = totalCrimes - solvedCrimes;
-  $("#crime-level").val(crimeValue);
+  crimeValue = refreshCrimeMeter();
   if (crimeValue >= 25) {
     gameOver();
   }
   return totalCrimes;
 };
+
+const refreshCrimeMeter = () => {
+  const crimeValue = totalCrimes - solvedCrimes;
+  $("#crime-level").val(crimeValue);
+  return crimeValue
+}
 
 const updateInfo = () => {
   $("#money").text(stats.money);
