@@ -374,11 +374,9 @@ const gameOver = () => {
     `<i class="fa-solid fa-handcuffs"> ${gameStats.crimesSolved}</i>`
   );
   $("#scores-page").click(function () {
-    window.location.href = "../../scores.html";
+    window.location.href = "./scores.html";
   });
   $("#modal-game-over").show();
-
-  console.log("Game Over");
 };
 
 // local storage
@@ -421,8 +419,13 @@ const startTimer = () => {
   }, 1000);
 };
 
+const onQuit = () => {
+  gameOver();
+}
+
 const onReady = () => {
   gameInProgress = true;
+  $("#quit-btn").click(onQuit)
   handleNavBarToggle();
   resetInfo();
   resetResources();
