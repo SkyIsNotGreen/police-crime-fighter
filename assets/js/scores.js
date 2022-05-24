@@ -18,9 +18,11 @@ const writeToLocalStorage = (key, value) => {
 };
 
 const gameStat = readFromLocalStorage("pastUserHistory");
-gameStat.sort((a, b) => {
-  return b.money - a.money;
-});
+if (gameStat) {
+  gameStat.sort((a, b) => {
+    return b.money - a.money;
+  });
+}
 
 // convert time format
 const displayTime = (time) => {
@@ -35,24 +37,21 @@ const displayTime = (time) => {
   return `0${minutes} : ${newSeconds}`;
 };
 
-// write a funciton to calculate total score
-
 // for each function to render ranking table
 const renderRankingSection = () => {
   // const data = readFromLocalStorage("pastUserHistory");
   console.log("the data is:" + JSON.stringify(gameStat[3]));
 
   const renderRankingBoard = (element, index) => {
-    const tableInfo = `<tr>
-    <th>${index + 1}</th>
+    const tableInfo = `<tr class="tableRow">
+    <th class="tableText">${index + 1}</th>
     <td>
       <i class="fa-solid fa-user"></i>
       <p class="userNameOnTable">${element.userName}</p>
     </td>
-    <td>${displayTime(element.time)}</td>
-    <td>${element.crimesSolved}</td>
-    <td>${element.money}</td>
-    <td>50</td>
+    <td class="tableText">${displayTime(element.time)}</td>
+    <td class="tableText">${element.crimesSolved}</td>
+    <td class="tableText">${element.money}</td>
     `;
     $("#thead").append(tableInfo);
   };
@@ -74,7 +73,7 @@ const renderWinnerBoard = () => {
   <table class="table is-fullwidth">
     <tbody>
       <thead>
-        <tr>
+        <tr class="tableTitle">
           <th>Rank</th>
           <th>User Name</th>
           <th>Time Used</th>
@@ -103,13 +102,12 @@ const renderWinnerBoard = () => {
     <div class="goldCardItem">
       <img class="image" src="./assets/images/goldMadel.png" />
       <p class="text">
-        Score: 50 <br />
         1 / ${gameStat.length}
       </p>
-      <p>
+      <p class="subText">
+      <Strong class="money">Money : ${gameStat[0].money}</Strong><br />
         Time: ${displayTime(gameStat[0].time)} <br />
-        Crime Solved:${gameStat[0].crimesSolved} <br />
-        Money:${gameStat[0].money}
+        Crime Solved: ${gameStat[0].crimesSolved} 
       </p>
     </div>
   </div>
@@ -118,7 +116,7 @@ const renderWinnerBoard = () => {
 <table class="table is-fullwidth">
   <tbody>
     <thead>
-      <tr>
+      <tr class="tableTitle">
         <th>Rank</th>
         <th>User Name</th>
         <th>Time Used</th>
@@ -140,13 +138,12 @@ const renderWinnerBoard = () => {
     <div class="silverCardItem">
       <img class="image" src="./assets/images/silverMadel.png" />
       <p class="text">
-        Score: 50 <br />
         2  / ${gameStat.length}
       </p>
-      <p>
+      <p class="subText">
+        <Strong class="money">Money : ${gameStat[1].money}</Strong><br />
         Time: ${displayTime(gameStat[1].time)}<br />
-        Crime Solved:${gameStat[1].crimesSolved}<br />
-        Money:${gameStat[1].money}
+        Crime Solved: ${gameStat[1].crimesSolved}
       </p>
     </div>
   </div>
@@ -158,13 +155,12 @@ const renderWinnerBoard = () => {
     <div class="goldCardItem">
       <img class="image" src="./assets/images/goldMadel.png" />
       <p class="text">
-        Score: 50 <br />
         1/ ${gameStat.length}
       </p>
-      <p>
+      <p class="subText">
+      <Strong class="money">Money : ${gameStat[0].money}</Strong><br />
         Time: ${displayTime(gameStat[0].time)} <br />
-        Crime Solved:${gameStat[0].crimesSolved} <br />
-        Money:${gameStat[0].money}
+        Crime Solved: ${gameStat[0].crimesSolved} 
       </p>
     </div>
   </div>
@@ -173,7 +169,7 @@ const renderWinnerBoard = () => {
 <table class="table is-fullwidth">
   <tbody>
     <thead>
-      <tr>
+      <tr class="tableTitle">
         <th>Rank</th>
         <th>User Name</th>
         <th>Time Used</th>
@@ -195,13 +191,12 @@ const renderWinnerBoard = () => {
     <div class="silverCardItem">
       <img class="image" src="./assets/images/silverMadel.png" />
       <p class="text">
-        Score: 50 <br />
         2  / ${gameStat.length}
       </p>
-      <p>
+      <p class="subText">
+        <Strong class="money">Money : ${gameStat[1].money}</Strong><br />
         Time: ${displayTime(gameStat[1].time)}<br />
-        Crime Solved:${gameStat[1].crimesSolved}<br />
-        Money:${gameStat[1].money}
+        Crime Solved: ${gameStat[1].crimesSolved}
       </p>
     </div>
   </div>
@@ -213,13 +208,12 @@ const renderWinnerBoard = () => {
     <div class="goldCardItem">
       <img class="image" src="./assets/images/goldMadel.png" />
       <p class="text">
-        Score: 50 <br />
         1 / ${gameStat.length}
       </p>
-      <p>
+      <p class="subText">
+        <Strong class="money">Money : ${gameStat[0].money}</Strong><br />
         Time: ${displayTime(gameStat[0].time)} <br />
-        Crime Solved:${gameStat[0].crimesSolved} <br />
-        Money:${gameStat[0].money}
+        Crime Solved: ${gameStat[0].crimesSolved} 
       </p>
     </div>
   </div>
@@ -230,13 +224,12 @@ const renderWinnerBoard = () => {
   <div class="bronzeCardItem">
     <img class="image" src="./assets/images/bronzeMadel.png" />
     <p class="text">
-      Score: 50 <br />
       3 / ${gameStat.length}
     </p>
-    <p>
+    <p class="subText">
+      <Strong class="money">Money : ${gameStat[2].money}</Strong><br />
       Time: ${displayTime(gameStat[2].time)}  <br />
-      Crime Solved:${gameStat[2].crimesSolved}  <br />
-      Money:${gameStat[2].money}
+      Crime Solved: ${gameStat[2].crimesSolved}  
     </p>
   </div>
 </div>
@@ -245,7 +238,7 @@ const renderWinnerBoard = () => {
 <table class="table is-fullwidth">
   <tbody>
     <thead>
-      <tr>
+      <tr class="tableTitle">
         <th>Rank</th>
         <th>User Name</th>
         <th>Time Used</th>
@@ -267,13 +260,12 @@ const renderWinnerBoard = () => {
     <div class="silverCardItem">
       <img class="image" src="./assets/images/silverMadel.png" />
       <p class="text">
-        Score: 50 <br />
         2  / ${gameStat.length}
       </p>
-      <p>
+      <p class="subText">
+        <Strong class="money">Money : ${gameStat[1].money}</Strong><br />
         Time: ${displayTime(gameStat[1].time)}<br />
-        Crime Solved:${gameStat[1].crimesSolved}<br />
-        Money:${gameStat[1].money}
+        Crime Solved: ${gameStat[1].crimesSolved}
       </p>
     </div>
   </div>
@@ -285,13 +277,12 @@ const renderWinnerBoard = () => {
     <div class="goldCardItem">
       <img class="image" src="./assets/images/goldMadel.png" />
       <p class="text">
-        Score: 50 <br />
         1 / ${gameStat.length}
       </p>
-      <p>
+      <p class="subText">
+        <Strong class="money">Money : ${gameStat[0].money}</Strong><br />
         Time: ${displayTime(gameStat[0].time)} <br />
-        Crime Solved:${gameStat[0].crimesSolved} <br />
-        Money:${gameStat[0].money}
+        Crime Solved: ${gameStat[0].crimesSolved}
       </p>
     </div>
   </div>
@@ -302,13 +293,12 @@ const renderWinnerBoard = () => {
   <div class="bronzeCardItem">
     <img class="image" src="./assets/images/bronzeMadel.png" />
     <p class="text">
-      Score: 50 <br />
       3 / ${gameStat.length}
     </p>
-    <p>
+    <p class="subText">
+      <Strong class="money">Money : ${gameStat[2].money}</Strong><br />
       Time: ${displayTime(gameStat[2].time)}  <br />
-      Crime Solved:${gameStat[2].crimesSolved}  <br />
-      Money:${gameStat[2].money}
+      Crime Solved: ${gameStat[2].crimesSolved} 
     </p>
   </div>
 </div>
@@ -317,13 +307,12 @@ const renderWinnerBoard = () => {
 <table class="table is-fullwidth">
   <tbody>
     <thead id="thead">
-      <tr>
+      <tr class="tableTitle">
         <th>Rank</th>
         <th>User Name</th>
         <th>Time Used</th>
         <th>Crime Solved</th>
         <th>Money</th>
-        <th>Total Score</th>
       </tr>
     </thead>
   </tbody>

@@ -13,6 +13,14 @@
 }
 
 /* banner section */
+.title {
+  color: white;
+  font-size: 50px;
+}
+.subtitle {
+  color: white;
+  font-size: 25px;
+}
 .leardrBoardColor {
   background-color: var(--medium-slate-blue);
 }
@@ -20,26 +28,9 @@
   display: flex;
   flex-direction: row;
 }
-/* fix this amination later */
 .PoliceContainer {
   width: 30%;
   height: 100%;
-  /* transition: transform 1s cubic-bezier(0.075, 0.82, 0.165, 1) 3s; */
-}
-.bannerContainer.PoliceContainer {
-  animation: topDown 1s ease-in;
-}
-
-@keyframes topDown {
-  0% {
-    transform: translateX(0);
-  }
-  33% {
-    transform: translateX();
-  }
-  100% {
-    transform: translateX(100%);
-  }
 }
 .policeImage {
   width: 100%;
@@ -108,21 +99,53 @@
 .image {
   width: 3rem;
 }
-.text {
+.text,
+.money,
+.subText {
   font-family: "Lato", sans-serif;
   font-family: "Source Sans Pro", sans-serif;
-  font-weight: 600;
-  font-size: large;
-  color: white;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 23px;
+  color: rgb(241, 232, 232);
   margin-bottom: 0.4rem;
+  font-family: "Avenir Next", sans-serif;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  display: inline-block;
+}
+.money {
+  font-size: 20px;
+  font-weight: 900;
+}
+.subText {
+  font-size: 16px;
+  font-weight: 650;
+}
+
+/* section to render rest scores on table */
+.tableRow {
+  background-color: #edede9;
+}
+.tableTitle {
+  font-family: "Avenir Next", sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.02em;
+  background-color: #9a8c98;
 }
 .userNameOnTable {
   color: var(--medium-slate-blue);
   font-family: "Avenir Next", sans-serif;
   font-weight: 900;
-  font-size: 0.8rem;
+  font-size: 17px;
   text-transform: uppercase;
   font-style: italic;
   letter-spacing: 0.04em;
   display: inline-block;
+}
+.tableText {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-size: 17px;
 }
