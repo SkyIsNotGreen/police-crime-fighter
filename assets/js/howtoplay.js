@@ -9,11 +9,11 @@ const speech = [
     value: 1,
   },
   {
-    text: "Here is where you come in. Please help my team and me solve the crime by distributing the resources. Watch out if you go too slow; your progress will be less than 50%, and the game will be over",
+    text: "Here is where you come in. Please help my team and me to solve the crimes by distributing our resources. We never have enough time- so please try to solve as many crimes as possible to make as much money as possible to buy even more resources.",
     value: 2,
   },
   {
-    text: "Make good decisions to earn more money and thereby. Good Luck, I know you will make us proud.",
+    text: "Make good decisions to earn more money. Good Luck, I know you will make us proud.",
     value: 3,
   },
 ];
