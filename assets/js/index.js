@@ -18,7 +18,7 @@ const readFromLocalStorage = (key, defaultValue) => {
 const clickToStart1 = `<a
                   href="./how-to-play.html"
                   id="button"
-                  class="button is-medium is-responsive is-link is-outlined"
+                  class="button is-medium is-responsive is-link"
                 >
                   Click to start
                 </a>`;
@@ -26,7 +26,7 @@ const clickToStart1 = `<a
 const clickToStart2 = ` <a
                   href="./user-input.html"
                   id="button"
-                  class="button is-medium is-responsive is-link is-outlined"
+                  class="button is-medium is-responsive is-link "
                 >
                   Click to start
                 </a>`;
